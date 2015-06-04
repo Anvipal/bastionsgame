@@ -1,0 +1,18 @@
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.site-index,
+.heroes-wrap {
+    width: 1008px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.popup {
+    display: none;
+}
