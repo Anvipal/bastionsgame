@@ -19,6 +19,14 @@ class QuestsController extends Controller
 
     public function actionIndex()
     {
+        $quests_cnt = Quest::find()
+            ->where(['status'=>Quest::ST_NEW])
+            ->orWhere(['status'=>Quest::ST_IN_PROCESS])
+            ->count();
+        if ($quests_cnt < Quest::MAX_QUESTS)
+        {
+
+        }
         return $this->render('index');
     }
 }
