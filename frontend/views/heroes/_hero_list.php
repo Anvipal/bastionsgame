@@ -6,10 +6,10 @@
  * Time: 22:32
  */
 /**
- * @var $heroes \app\models\Hero[]
+ * @var $heroes \common\models\Hero[]
  */
 
-use \app\models\Hero;
+use \common\models\Hero;
 use \yii\helpers\html;
 
 ?>

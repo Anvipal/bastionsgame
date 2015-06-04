@@ -9,7 +9,7 @@ use yii\web\ForbiddenHttpException;
 
 /**
  * Class HeroesController
- * @package app\controllers
+ * @package frontend\controllers
  */
 class HeroesController extends Controller
 {
@@ -72,8 +72,9 @@ class HeroesController extends Controller
 
     /**
      * @param $id
-     * @var $hero \app\models\Hero
+     * @var $hero \common\models\Hero
      * @return array
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionDelete($id = null)
     {

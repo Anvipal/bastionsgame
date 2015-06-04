@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $this \yii\web\View
- * @var $heroes \app\models\Hero[]
+ * @var $heroes \common\models\Hero[]
  */
 use \yii\helpers\Html;
 
