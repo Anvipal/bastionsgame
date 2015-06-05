@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Exception;
 
 /**
  * This is the model class for table "quests".
@@ -19,6 +20,7 @@ use Yii;
  * @property integer $timestart
  * @property integer $status
  * @property string $statusname
+ * @property integer $stdquests_id
  *
  * @property User $user
  * @property QuestHero[] $questsheroes
@@ -74,8 +76,8 @@ class Quest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
-            [['user_id', 'midhlevel', 'hcnt', 'chance', 'obscales', 'timetodo', 'timestart', 'status'], 'integer'],
+            [['user_id', 'stdquests_id'], 'required'],
+            [['user_id', 'stdquests_id', 'midhlevel', 'hcnt', 'chance', 'obscales', 'timetodo', 'timestart', 'status'], 'integer'],
             [['desc'], 'string'],
             [['name'], 'string', 'max' => 255]
         ];
@@ -119,6 +121,44 @@ class Quest extends \yii\db\ActiveRecord
 
     public function getStdquest()
     {
-        return $this->hasOne(StdQuest::className(),['id'=>'stdquests_id']);
+        return $this->hasOne(StdQuest::className(), ['id' => 'stdquests_id']);
+    }
+
+
+    public static function userquestupdate(\common\models\User $user)
+    {
+        $quests_cnt = Quest::find()
+            ->where(['status' => Quest::ST_NEW])
+            ->orWhere(['status' => Quest::ST_IN_PROCESS])
+            ->count();
+        $quests_cnt = self::MAX_QUESTS - $quests_cnt;
+        if (intval($quests_cnt) && $quests_cnt > 0) {
+            $used_quests = self::find()
+                ->select('stdquests_id')
+                ->where('status in (:p1, :p2)', [':p1' => self::ST_IN_PROCESS, ':p2' => self::ST_NEW])
+                ->all();
+            $std_quests = StdQuest::find()
+                ->select('id')
+                ->where('id not in (' . implode(',', $used_quests) . ')')
+                ->all();
+            $new_quests_indexes = array_rand($std_quests, $quests_cnt);
+            for($i = 0; $i < count($new_quests_indexes); $i++)
+            {
+                $newq = new Quest();
+                $newq->name = $std_quests[$new_quests_indexes[$i]]->name;
+                $newq->desk = $std_quests[$new_quests_indexes[$i]]->desk;
+                $newq->midhlevel = $std_quests[$new_quests_indexes[$i]]->midhlevel;
+                $newq->hcnt = $std_quests[$new_quests_indexes[$i]]->hcnt;
+                $newq->obscales = $std_quests[$new_quests_indexes[$i]]->obscales;
+                $newq->timetodo = $std_quests[$new_quests_indexes[$i]]->timetodo;
+                $newq->stdquests_id =$std_quests[$new_quests_indexes[$i]]->id;
+                $newq->user_id = $user->id;
+                if(!$newq->save())
+                {
+                    throw new Exception('Помилка оновлення завдань');
+                }
+            }
+
+        }
     }
 }

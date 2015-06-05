@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 use yii\web\Controller;
 use common\models\Quest;
@@ -19,14 +20,10 @@ class QuestsController extends Controller
 
     public function actionIndex()
     {
-        $quests_cnt = Quest::find()
-            ->where(['status'=>Quest::ST_NEW])
-            ->orWhere(['status'=>Quest::ST_IN_PROCESS])
-            ->count();
-        if ($quests_cnt < Quest::MAX_QUESTS)
-        {
-
-        }
+        Quest::userquestupdate(User::find(['id' => 1])->limit(1)->one());
+        $quests = Quest::find(['user_id' => User::find(['id' => 1])->limit(1)->one()[0]->id])
+            ->where('status in (' . Quest::ST_NEW . ',' . Quest::ST_IN_PROCESS . ')')
+            ->orderBy('status desc');
         return $this->render('index');
     }
 }
