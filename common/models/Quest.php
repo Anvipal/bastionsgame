@@ -62,6 +62,11 @@ class Quest extends \yii\db\ActiveRecord
         return self::status_list()[$this->status];
     }
 
+    public function isNew()
+    {
+        return $this->status == self::ST_NEW;
+    }
+
     /**
      * @inheritdoc
      */
@@ -125,40 +130,41 @@ class Quest extends \yii\db\ActiveRecord
     }
 
 
-    public static function userquestupdate(\common\models\User $user)
+    public static function userquestupdate()
     {
-        $quests_cnt = Quest::find()
-            ->where(['status' => Quest::ST_NEW])
-            ->orWhere(['status' => Quest::ST_IN_PROCESS])
-            ->count();
-        $quests_cnt = self::MAX_QUESTS - $quests_cnt;
-        if (intval($quests_cnt) && $quests_cnt > 0) {
-            $used_quests = self::find()
-                ->select('stdquests_id')
-                ->where('status in (:p1, :p2)', [':p1' => self::ST_IN_PROCESS, ':p2' => self::ST_NEW])
-                ->all();
-            $std_quests = StdQuest::find()
-                ->select('id')
-                ->where('id not in (' . implode(',', $used_quests) . ')')
-                ->all();
-            $new_quests_indexes = array_rand($std_quests, $quests_cnt);
-            for($i = 0; $i < count($new_quests_indexes); $i++)
-            {
-                $newq = new Quest();
-                $newq->name = $std_quests[$new_quests_indexes[$i]]->name;
-                $newq->desk = $std_quests[$new_quests_indexes[$i]]->desk;
-                $newq->midhlevel = $std_quests[$new_quests_indexes[$i]]->midhlevel;
-                $newq->hcnt = $std_quests[$new_quests_indexes[$i]]->hcnt;
-                $newq->obscales = $std_quests[$new_quests_indexes[$i]]->obscales;
-                $newq->timetodo = $std_quests[$new_quests_indexes[$i]]->timetodo;
-                $newq->stdquests_id =$std_quests[$new_quests_indexes[$i]]->id;
-                $newq->user_id = $user->id;
-                if(!$newq->save())
-                {
-                    throw new Exception('Помилка оновлення завдань');
+        $users = User::find()->all();
+        foreach ($users as $user) {
+            $quests_cnt = Quest::find()
+                ->where(['status' => Quest::ST_NEW])
+                ->orWhere(['status' => Quest::ST_IN_PROCESS])
+                ->count();
+            $quests_cnt = self::MAX_QUESTS - $quests_cnt;
+            if (intval($quests_cnt) && $quests_cnt > 0) {
+                $used_quests = self::find()
+                    ->select('stdquests_id')
+                    ->where('status in (:p1, :p2)', [':p1' => self::ST_IN_PROCESS, ':p2' => self::ST_NEW])
+                    ->all();
+                $std_quests = StdQuest::find()
+                    ->select('id')
+                    ->where('id not in (' . implode(',', $used_quests) . ')')
+                    ->all();
+                $new_quests_indexes = array_rand($std_quests, $quests_cnt);
+                for ($i = 0; $i < count($new_quests_indexes); $i++) {
+                    $newq = new Quest();
+                    $newq->name = $std_quests[$new_quests_indexes[$i]]->name;
+                    $newq->desk = $std_quests[$new_quests_indexes[$i]]->desk;
+                    $newq->midhlevel = $std_quests[$new_quests_indexes[$i]]->midhlevel;
+                    $newq->hcnt = $std_quests[$new_quests_indexes[$i]]->hcnt;
+                    $newq->obscales = $std_quests[$new_quests_indexes[$i]]->obscales;
+                    $newq->timetodo = $std_quests[$new_quests_indexes[$i]]->timetodo;
+                    $newq->stdquests_id = $std_quests[$new_quests_indexes[$i]]->id;
+                    $newq->user_id = $user->id;
+                    $newq->status = self::ST_NEW;
+                    if (!$newq->save()) {
+                        throw new Exception('Помилка оновлення завдань');
+                    }
                 }
             }
-
         }
     }
 }

@@ -20,10 +20,9 @@ class QuestsController extends Controller
 
     public function actionIndex()
     {
-        Quest::userquestupdate(User::find(['id' => 1])->limit(1)->one());
-        $quests = Quest::find(['user_id' => User::find(['id' => 1])->limit(1)->one()[0]->id])
+        /*$quests = Quest::find(['user_id' => (User::find(['id' => 1])->limit(1)->one()[0])->id])
             ->where('status in (' . Quest::ST_NEW . ',' . Quest::ST_IN_PROCESS . ')')
-            ->orderBy('status desc');
-        return $this->render('index');
+            ->orderBy('status desc');*/
+        return $this->render('index'/*, ['quests'=>$quests]*/);
     }
 }

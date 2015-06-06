@@ -30,7 +30,7 @@ use \yii\helpers\html;
 
         <? if ($hero->heroskills[Hero::HS_SECOND]): ?>
             <div class="hero-power">
-                <img src="img/hero/power/<?= $hero->hclass . Hero::HS_SECOND ?>.jpg"/>
+                <img src="/img/hero/power/<?= $hero->hclass . Hero::HS_SECOND ?>.jpg"/>
                 <span class="hero-power-info"><?= $hero->heroskills[Hero::HS_SECOND]['name'] ?></span>
             </div>
         <? else: ?>

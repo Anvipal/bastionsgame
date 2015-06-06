@@ -34,7 +34,7 @@ $this->title = 'Bastions - Heroes';
                 if ($('.popup').is(':visible') == false) {
                     $.ajax({
                         type: 'GET',
-                        url: 'heroes/hire'
+                        url: '/heroes/hire/'
                     }).done(function (popup) {
                         if (popup != undefined) {
                             $('#popup_hero').html(popup);
@@ -46,7 +46,7 @@ $this->title = 'Bastions - Heroes';
             $('#popup_hero').on('click', '#hire_accept', function (e) {
 
                 $.ajax({
-                    url: '/heroes/hire',
+                    url: '/heroes/hire/',
                     type: 'POST',
                     dataType: 'json',
                     data: $('#hero_form').serialize()
