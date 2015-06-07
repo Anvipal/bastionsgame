@@ -24,31 +24,31 @@ use \yii\helpers\html;
         <br/>
 
         <div class="hero-power">
-            <img src="/img/hero/power/<?= $hero->hclass . Hero::HS_FIRST ?>.jpg"/>
+            <img src="/img/heroes/power/<?= $hero->hclass . Hero::HS_FIRST ?>.jpg"/>
             <span class="hero-power-info"><?= $hero->heroskills[Hero::HS_FIRST]['name'] ?></span>
         </div>
 
         <? if ($hero->heroskills[Hero::HS_SECOND]): ?>
             <div class="hero-power">
-                <img src="/img/hero/power/<?= $hero->hclass . Hero::HS_SECOND ?>.jpg"/>
+                <img src="/img/heroes/power/<?= $hero->hclass . Hero::HS_SECOND ?>.jpg"/>
                 <span class="hero-power-info"><?= $hero->heroskills[Hero::HS_SECOND]['name'] ?></span>
             </div>
         <? else: ?>
             <div class="hero-power">
-                <img src="/img/hero/power/not_avaliable_10.jpg"/>
+                <img src="/img/heroes/power/not_avaliable_10.jpg"/>
                 <span class="hero-power-info">Досягніть 10 рівня, щоб отримати доступ до другої переваги!</span>
             </div>
         <? endif; ?>
 
         <? if ($hero->heroskills[Hero::HS_THIRD]): ?>
             <div class="hero-power">
-                <img src="img/hero/power/<?= $hero->hclass . Hero::HS_THIRD ?>.jpg"/>
+                <img src="/img/heroes/power/<?= $hero->hclass . Hero::HS_THIRD ?>.jpg"/>
                 <span class="hero-power-info"><?= $hero->heroskills[Hero::HS_THIRD]['name'] ?></span>
             </div>
             <br/>
         <? else: ?>
             <div class="hero-power">
-                <img src="/img/hero/power/not_avaliable_20.jpg"/>
+                <img src="/img/heroes/power/not_avaliable_20.jpg"/>
                 <span class="hero-power-info">Досягніть 20 рівня, щоб отримати доступ до третьої переваги!</span>
             </div>
         <? endif; ?>
