@@ -21,6 +21,7 @@ use yii\base\Exception;
  * @property integer $status
  * @property string $statusname
  * @property integer $stdquests_id
+ * @property bool $isNew
  *
  * @property User $user
  * @property QuestHero[] $questsheroes
@@ -62,7 +63,7 @@ class Quest extends \yii\db\ActiveRecord
         return self::status_list()[$this->status];
     }
 
-    public function isNew()
+    public function getIsNew()
     {
         return $this->status == self::ST_NEW;
     }

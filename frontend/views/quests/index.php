@@ -25,7 +25,7 @@ $this->title = 'Bastion - Quests';
         <div>
             <span><?= $quest->name; ?></span>
             <span><?= $quest->statusname . ', ' . date('H:i',(time() - $quest->timestart)); ?></span>
-            <? if ($quest->isNew()): ?>
+            <? if ($quest->isNew): ?>
                 <span>Середній рівень: <?= $quest->midhlevel ?></span>
             <? endif; ?>
             <div>
