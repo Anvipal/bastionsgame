@@ -16,6 +16,7 @@ use Yii;
  * @property integer $timetodo
  *
  * @property Quest[] $quests
+ * @property StdObstacle[] $idObstacles
  */
 class StdQuest extends \yii\db\ActiveRecord
 {
@@ -58,8 +59,16 @@ class StdQuest extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getQuest()
+    public function getQuests()
     {
         return $this->hasMany(Quest::className(), ['stdquests_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdObstacles()
+    {
+        return $this->hasMany(StdObstacle::className(), ['id' => 'id_obstacle'])->viaTable('std_obstaclequest', ['id_quest' => 'id']);
     }
 }

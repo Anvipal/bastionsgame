@@ -14,8 +14,8 @@ use Yii;
  * @property string $salt
  * @property string $goldcnt
  *
- * @property Hero[] $heroes
- * @property Quest[] $quests
+ * @property Heroes[] $heroes
+ * @property Quests[] $quests
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -59,7 +59,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getHeroes()
     {
-        return $this->hasMany(Hero::className(), ['user_id' => 'id']);
+        return $this->hasMany(Heroes::className(), ['id_user' => 'id']);
     }
 
     /**
@@ -67,6 +67,6 @@ class User extends \yii\db\ActiveRecord
      */
     public function getQuests()
     {
-        return $this->hasMany(Quest::className(), ['user_id' => 'id']);
+        return $this->hasMany(Quests::className(), ['user_id' => 'id']);
     }
 }
