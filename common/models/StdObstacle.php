@@ -10,10 +10,8 @@ use Yii;
  * @property string $id
  * @property string $title
  *
- * @property StdObstaclehero[] $stdObstacleheroes
- * @property StdHeroes[] $idStdheroes
- * @property StdObstaclequest[] $stdObstaclequests
- * @property StdQuests[] $idQuests
+ * @property StdHero[] $idStdheroes
+ * @property StdQuest[] $idQuests
  */
 class StdObstacle extends \yii\db\ActiveRecord
 {

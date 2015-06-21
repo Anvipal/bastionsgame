@@ -10,9 +10,9 @@ use Yii;
  * @property string $id
  * @property string $name
  *
- * @property Heroes[] $heroes
- * @property StdObstaclehero[] $stdObstacleheroes
- * @property StdObstacles[] $idStdobstacles
+ * @property Hero[] $heroes
+ * @property StdObstacle[] $idStdobstacles
+ * @property StdHeroSkill[] $idStdSkills
  */
 class StdHero extends \yii\db\ActiveRecord
 {
@@ -50,15 +50,7 @@ class StdHero extends \yii\db\ActiveRecord
      */
     public function getHeroes()
     {
-        return $this->hasMany(Heroes::className(), ['id_stdhero' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStdObstacleheroes()
-    {
-        return $this->hasMany(StdObstaclehero::className(), ['id_stdhero' => 'id']);
+        return $this->hasMany(Hero::className(), ['id_stdhero' => 'id']);
     }
 
     /**
@@ -66,6 +58,11 @@ class StdHero extends \yii\db\ActiveRecord
      */
     public function getIdStdobstacles()
     {
-        return $this->hasMany(StdObstacles::className(), ['id' => 'id_stdobstacle'])->viaTable('std_obstaclehero', ['id_stdhero' => 'id']);
+        return $this->hasMany(StdObstacle::className(), ['id' => 'id_stdobstacle'])->viaTable('std_obstaclehero', ['id_stdhero' => 'id']);
+    }
+
+    public function getIdStdSkills()
+    {
+        return $this->hasMany(StdHeroSkill::className(), ['id_stdhero' => 'id']);
     }
 }

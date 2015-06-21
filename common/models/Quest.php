@@ -19,12 +19,25 @@ use Yii;
  * @property integer $status
  * @property string $stdquests_id
  *
- * @property StdQuests $stdquests
- * @property Users $user
- * @property Questsheroes[] $questsheroes
+ * @property StdQuest $idStdquest
+ * @property User $user
+ * @property StdObstacle $obstacles
  */
 class Quest extends \yii\db\ActiveRecord
 {
+    const ST_NEW = 0;
+    const ST_IN_PROCESS = 1;
+    const ST_DONE = 2;
+
+    public static function statuslist()
+    {
+        return [
+            self::ST_NEW => 'Нове',
+            self::ST_IN_PROCESS => 'Виконується',
+            self::ST_DONE => 'Завершено',
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -69,9 +82,9 @@ class Quest extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStdquests()
+    public function getIdStdquest()
     {
-        return $this->hasOne(StdQuests::className(), ['id' => 'stdquests_id']);
+        return $this->hasOne(StdQuest::className(), ['id' => 'stdquests_id']);
     }
 
     /**
@@ -79,14 +92,17 @@ class Quest extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getQuestsheroes()
+    public function getHeroes()
     {
-        return $this->hasMany(Questsheroes::className(), ['quests_id' => 'id']);
+        return $this->hasMany(Hero::className(), ['id' => 'id_hero'])->viaTable('questsheroes', ['id_quest' => 'id']);
     }
+
+    public function getObstacles()
+    {
+        return $this->idStdquest->idObstacles;
+    }
+
 }

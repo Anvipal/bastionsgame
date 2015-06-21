@@ -69,16 +69,14 @@ class Hero extends \yii\db\ActiveRecord
         return $this->hasOne(StdHero::className(), ['id' => 'id_stdhero']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getQuestsheroes()
-    {
-        return $this->hasOne(Questsheroes::className(), ['heroes_id' => 'id']);
-    }
 
     public function getQuest()
     {
         return $this->hasOne(Quest::className(),['id' => 'id_quest'])->viaTable('questheroes', ['id_hero' => 'id']);
+    }
+
+    public function getSkills()
+    {
+        return $this->idStdhero->idStdSkills;
     }
 }
