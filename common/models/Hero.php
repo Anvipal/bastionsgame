@@ -13,7 +13,6 @@ use Yii;
  * @property string $title
  * @property string $hexp
  * @property string $hlevel
- * @property bool $onMission
  *
  * @property User $idUser
  * @property StdHero $idStdhero
@@ -27,6 +26,14 @@ class Hero extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'heroes';
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|static
+     */
+    public static function find()
+    {
+        return parent::find()->andWhere(['id_user' => 1]);
     }
 
     /**
@@ -56,14 +63,6 @@ class Hero extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getOnMission()
-    {
-        if (!$this->idQuest->one())
-        {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -81,12 +80,16 @@ class Hero extends \yii\db\ActiveRecord
         return $this->hasOne(StdHero::className(), ['id' => 'id_stdhero']);
     }
 
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getIdQuest()
     {
-        return $this->hasOne(Quest::className(),['id' => 'id_quest'])->viaTable('questheroes', ['id_hero' => 'id']);
+        return $this->hasOne(Quest::className(),['id' => 'id_quest'])->viaTable('questsheroes', ['id_hero' => 'id']);
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSkills()
     {
         return $this->idStdhero->idStdSkills;

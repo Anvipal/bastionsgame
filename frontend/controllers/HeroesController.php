@@ -32,7 +32,14 @@ class HeroesController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Hero::find()->andWhere(['id_user' => 1])
+            'query' => Hero::find(),
+            'sort' => [
+                'defaultOrder' => [ 'title' => SORT_ASC ],
+            ],
+            'pagination' => [
+                'pageSize' => 20,
+                'validatePage' => false,
+            ]
         ]);
 
         return $this->render('index', ['heroes' => $dataProvider]);

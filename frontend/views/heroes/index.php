@@ -4,19 +4,28 @@
  * @var $heroes \yii\db\ActiveQuery
  */
 use \yii\helpers\Html;
+use \yii\helpers\Url;
+use \yii\widgets\Pjax;
+use \yii\widgets\ListView;
 
 $this->title = 'Bastions - Heroes';
-?>
-    <?php \yii\widgets\ListView::widget([
-        'dataProvider' => $heroes,
-        'itemOptions' => ['class' => 'hero-item'],
-        'itemView' => '_hero_list'
-    ]); ?>
-    <?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy']) ?>
-    <div class="popup-wrapper popup">
-    </div>
-    <div id="popup_hero" class="popup">
-    </div>
+
+Pjax::begin();
+
+echo ListView::widget([
+    'dataProvider' => $heroes,
+    'emptyText' => 'Жодного героя ще не найнято',
+    'itemOptions' => ['class' => 'item'],
+    'itemView' => '_hero_item',
+    'layout' => '{items}',
+]);
+
+Pjax::end(); ?>
+<?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy']) ?>
+<div class="popup-wrapper popup">
+</div>
+<div id="popup_hero" class="popup">
+</div>
 
 <script>
     (function () {
@@ -52,11 +61,13 @@ $this->title = 'Bastions - Heroes';
                     data: $('#hero_form').serialize()
                 }).done(function (response) {
                     /*if (response.err != undefined) {
-                        var msg = response.msg;
-                        console.log(response.err);
-                    }*/
+                     var msg = response.msg;
+                     console.log(response.err);
+                     }*/
                     $('#popup_hero').html(response);
                     HeroUpdate();
+                }).fail(function (response) {
+                    $('#popup_hero').html(response);
                 });
                 //$('.popup').hide();
                 //$('#popup_hero').html('');

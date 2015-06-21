@@ -11,6 +11,7 @@
 
 use \common\models\Hero;
 use \yii\helpers\html;
+use \yii\helpers\Url;
 
 ?>
 <div class="hero-item">
@@ -19,11 +20,12 @@ use \yii\helpers\html;
         <span><?= $model->idStdhero->name ?>, <?= $model->hlevel ?> рівень</span>
     </div>
     <br/>
+
     <div>
-        <?= $model->onMission
-            ? 'Зараз на завданні' . '<br/>' . Html::a('/quests/view/' . $model->idQuest->id, $model->idQuest->idStdQuest->title)
-            : Html::a('Почати завдання', '/quest/');
+        <?= isset($model->idQuest)
+            ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute('/quests/view', ['id' => $model->idQuest->id,] ))
+            : Html::a('Почати завдання', Url::toRoute('/quests'));
         ?>
-        <?= Html::a('Звільнити', '/heroes/delete/' . $model->id, ['class' => 'hero-delete']); ?>
+        <?= Html::a('Звільнити', Url::toRoute('delete', ['id' => $model->id]) , ['class' => 'hero-delete']); ?>
     </div>
 </div>
