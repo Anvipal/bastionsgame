@@ -58,7 +58,7 @@ class Hero extends \yii\db\ActiveRecord
 
     public function getOnMission()
     {
-        if ($this->idQuest->one() != [])
+        if (!$this->idQuest->one())
         {
             return true;
         }

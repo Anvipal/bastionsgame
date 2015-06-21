@@ -6,7 +6,7 @@
  * Time: 22:32
  */
 /**
- * @var $hero \common\models\Hero
+ * @var $model \common\models\Hero
  */
 
 use \common\models\Hero;
@@ -15,15 +15,15 @@ use \yii\helpers\html;
 ?>
 <div class="hero-item">
     <div class="hero-inner-info">
-        <span class="hero-title"><?= $hero->title ?></span>
-        <span><?= $hero->idStdhero->name ?>, <?= $hero->hlevel ?> рівень</span>
+        <span class="hero-title"><?= $model->title ?></span>
+        <span><?= $model->idStdhero->name ?>, <?= $model->hlevel ?> рівень</span>
     </div>
     <br/>
     <div>
-        <?= $hero->onMission
-            ? 'Зараз на завданні' . '<br/>' . Html::a('/quests/view/' . $hero->questhero->quest->id, $hero->questhero->quest->name)
+        <?= $model->onMission
+            ? 'Зараз на завданні' . '<br/>' . Html::a('/quests/view/' . $model->idQuest->id, $model->idQuest->idStdQuest->title)
             : Html::a('Почати завдання', '/quest/');
         ?>
-        <?= Html::a('Звільнити', '/heroes/delete/' . $hero->id, ['class' => 'hero-delete']); ?>
+        <?= Html::a('Звільнити', '/heroes/delete/' . $model->id, ['class' => 'hero-delete']); ?>
     </div>
 </div>
