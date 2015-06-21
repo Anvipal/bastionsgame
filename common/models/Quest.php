@@ -94,12 +94,16 @@ class Quest extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getHeroes()
     {
         return $this->hasMany(Hero::className(), ['id' => 'id_hero'])->viaTable('questsheroes', ['id_quest' => 'id']);
     }
-
+    /**
+     * @return \common\models\StdObstacle[]
+     */
     public function getObstacles()
     {
         return $this->idStdquest->idObstacles;

@@ -13,9 +13,11 @@ use Yii;
  * @property string $title
  * @property string $hexp
  * @property string $hlevel
+ * @property bool $onMission
  *
  * @property User $idUser
  * @property StdHero $idStdhero
+ * @property Quest $idQuest
  */
 class Hero extends \yii\db\ActiveRecord
 {
@@ -33,6 +35,7 @@ class Hero extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['id_user', 'id_stdhero', 'title'], 'required'],
             [['id_user', 'id_stdhero', 'hexp', 'hlevel'], 'integer'],
             [['title'], 'string', 'max' => 50]
         ];
@@ -45,12 +48,21 @@ class Hero extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_user' => 'Id User',
-            'id_stdhero' => 'Id Stdhero',
-            'title' => 'Title',
-            'hexp' => 'Hexp',
-            'hlevel' => 'Hlevel',
+            'id_user' => 'Власник',
+            'id_stdhero' => 'Клас',
+            'title' => 'Ім\'я',
+            'hexp' => 'Досвід',
+            'hlevel' => 'Рівень',
         ];
+    }
+
+    public function getOnMission()
+    {
+        if ($this->idQuest->one() != [])
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -70,7 +82,7 @@ class Hero extends \yii\db\ActiveRecord
     }
 
 
-    public function getQuest()
+    public function getIdQuest()
     {
         return $this->hasOne(Quest::className(),['id' => 'id_quest'])->viaTable('questheroes', ['id_hero' => 'id']);
     }

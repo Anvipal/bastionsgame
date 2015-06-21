@@ -1,22 +1,22 @@
 <?php
 /**
  * @var $this \yii\web\View
- * @var $heroes \common\models\Hero[]
+ * @var $heroes \yii\db\ActiveQuery
  */
 use \yii\helpers\Html;
 
 $this->title = 'Bastions - Heroes';
 ?>
-<div class="heroes-wrap">
-    <div id="hero_list">
-        <?= $this->render('_hero_list', ['heroes' => $heroes]); ?>
-    </div>
+    <?php \yii\widgets\ListView::widget([
+        'dataProvider' => $heroes,
+        'itemOptions' => ['class' => 'hero-item'],
+        'itemView' => '_hero_list'
+    ]); ?>
     <?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy']) ?>
     <div class="popup-wrapper popup">
     </div>
     <div id="popup_hero" class="popup">
     </div>
-</div>
 
 <script>
     (function () {
@@ -48,17 +48,18 @@ $this->title = 'Bastions - Heroes';
                 $.ajax({
                     url: '/heroes/hire/',
                     type: 'POST',
-                    dataType: 'json',
+                    //dataType: 'json',
                     data: $('#hero_form').serialize()
                 }).done(function (response) {
-                    if (response.err != undefined) {
+                    /*if (response.err != undefined) {
                         var msg = response.msg;
                         console.log(response.err);
-                    }
+                    }*/
+                    $('#popup_hero').html(response);
                     HeroUpdate();
                 });
-                $('.popup').hide();
-                $('#popup_hero').html('');
+                //$('.popup').hide();
+                //$('#popup_hero').html('');
             }).on('click', '#hire_cancel', function (e) {
                 $('.popup').hide();
                 $('#popup_hero').html('');

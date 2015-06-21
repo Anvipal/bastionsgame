@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Hero;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 
@@ -30,11 +31,11 @@ class HeroesController extends Controller
      */
     public function actionIndex()
     {
-        $heroes = Hero::find()->all();
-        if (Yii::$app->request->isAjax) {
-            return $this->renderPartial('_hero_list', ['heroes' => $heroes]);
-        }
-        return $this->render('index', ['heroes' => $heroes]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Hero::find()->andWhere(['id_user' => 1])
+        ]);
+
+        return $this->render('index', ['heroes' => $dataProvider]);
     }
 
     /**
@@ -45,23 +46,12 @@ class HeroesController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             $hero = new Hero();
-            if ($req = Yii::$app->request->post('Hero')) {
-                $hero->hclass = $req['hclass'];
-                $hero->hname = $req['hname'];
-                $hero->user_id = 1;
+            if ($hero->load(Yii::$app->request->post())) {
+                $hero->id_user = 1;
                 if ($hero->save()) {
-                    $answer = [
-                        'msg' => 'У вас додався новий герой!'
-                    ];
-                    Yii::$app->response->format = 'json';
-                    return $answer;
+                    return $this->redirect(['/heroes']);
                 } else {
-                    $answer = [
-                        'msg' => 'Виникла помилка додавання героя',
-                        'err' => $hero->getFirstErrors()
-                    ];
-                    Yii::$app->response->format = 'json';
-                    return $answer;
+                    return $this->renderPartial('_hire', ['model' => $hero]);
                 }
             }
             return $this->renderPartial('_hire', ['model' => $hero]);

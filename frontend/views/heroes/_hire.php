@@ -6,10 +6,11 @@
  * Time: 22:33
  *
  * @var $this \yii\web\View
- * @var $model \app\models\Hero
+ * @var $model \common\models\Hero
  */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\StdHero;
 
 
 ?>
@@ -23,8 +24,8 @@ use yii\widgets\ActiveForm;
         ]
     ]);
     ?>
-    <?= $form->field($model, 'hname')->textInput(); ?>
-    <?= $form->field($model, 'hclass')->dropDownList($model::heroclassname_list()) ?>
+    <?= $form->field($model, 'title')->textInput(); ?>
+    <?= $form->field($model, 'id_stdhero')->dropDownList(\yii\helpers\ArrayHelper::map(StdHero::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name')) ?>
     <?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hire_accept']) ?>
     <?= Html::a('Відмінити', 'javascript:void(0);', ['id' => 'hire_cancel']) ?>
     <? ActiveForm::end(); ?>
