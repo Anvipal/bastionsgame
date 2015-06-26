@@ -58,10 +58,10 @@ class HeroesController extends Controller
                 if ($hero->save()) {
                     return $this->redirect(['/heroes']);
                 } else {
-                    return $this->renderPartial('_hire', ['model' => $hero]);
+                    return $this->renderAjax('_hire', ['model' => $hero]);
                 }
             }
-            return $this->renderPartial('_hire', ['model' => $hero]);
+            return $this->renderAjax('_hire', ['model' => $hero]);
         } else {
             throw new ForbiddenHttpException();
         }
@@ -73,8 +73,9 @@ class HeroesController extends Controller
      * @return array
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionDelete($id = null)
+    public function actionDelete()
     {
+        $id = Yii::$app->request->get('id');
         if (is_numeric($id)) {
             if (Yii::$app->request->isAjax) {
                 $hero = Hero::find(['id' => $id])->one();

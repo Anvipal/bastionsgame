@@ -9,7 +9,6 @@
  * @var $model \common\models\Hero
  */
 
-use \common\models\Hero;
 use \yii\helpers\html;
 use \yii\helpers\Url;
 
@@ -23,9 +22,9 @@ use \yii\helpers\Url;
 
     <div>
         <?= isset($model->idQuest)
-            ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute('/quests/view', ['id' => $model->idQuest->id,] ))
-            : Html::a('Почати завдання', Url::toRoute('/quests'));
+            ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute('/quests/view', ['id' => $model->idQuest->id] ),['data-pjax' => 0])
+            : Html::a('Почати завдання', Url::toRoute('/quests'), ['data-pjax' => 0]);
         ?>
-        <?= Html::a('Звільнити', Url::toRoute('delete', ['id' => $model->id]) , ['class' => 'hero-delete']); ?>
+        <?= Html::a('Звільнити', Url::toRoute(['/heroes/delete', ['id' => $model->id]]) , ['class' => 'hero-delete', 'data-pjax' => 0]); ?>
     </div>
 </div>

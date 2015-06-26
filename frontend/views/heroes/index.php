@@ -4,9 +4,13 @@
  * @var $heroes \yii\db\ActiveQuery
  */
 use \yii\helpers\Html;
+use \yii\helpers\ArrayHelper;
 use \yii\helpers\Url;
 use \yii\widgets\Pjax;
 use \yii\widgets\ListView;
+use \yii\widgets\ActiveForm;
+use \common\models\StdHero;
+use \yii\bootstrap\Modal;
 
 $this->title = 'Bastions - Heroes';
 
@@ -22,10 +26,24 @@ echo ListView::widget([
 
 Pjax::end(); ?>
 <?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy']) ?>
-<div class="popup-wrapper popup">
-</div>
-<div id="popup_hero" class="popup">
-</div>
+<?
+echo Modal::widget([
+    'id' => 'hero_hire',
+    'header' => '<h4>Найняти нового героя</h4>' . Html::a('X', 'javascript:void(0);', ['class' => 'btn btn-popup-close', 'data-dismiss' => 'modal']),
+    'footer' => Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hire_accept']) . Html::a('Відмінити', 'javascript:void(0);', ['id' => 'hire_cancel']),
+]);
+$this->registerJs(
+    '$(\'#hero_buy\').on(\'click\', function () {
+            $.ajax({
+                url: \'/heroes/hire\',
+                type: \'GET\'
+            }).done(function(data){
+                $(\'.modal-body\').html(data);
+                $(\'#hero_hire\').modal(\'show\');
+            });
+        });'
+);
+?>
 
 <script>
     (function () {
@@ -38,43 +56,6 @@ Pjax::end(); ?>
                     $('#hero_list').html(response);
                 });
             }
-
-            $('#hero_buy').on('click', function () {
-                if ($('.popup').is(':visible') == false) {
-                    $.ajax({
-                        type: 'GET',
-                        url: '/heroes/hire/'
-                    }).done(function (popup) {
-                        if (popup != undefined) {
-                            $('#popup_hero').html(popup);
-                        }
-                    });
-                    $('.popup').show();
-                }
-            });
-            $('#popup_hero').on('click', '#hire_accept', function (e) {
-
-                $.ajax({
-                    url: '/heroes/hire/',
-                    type: 'POST',
-                    //dataType: 'json',
-                    data: $('#hero_form').serialize()
-                }).done(function (response) {
-                    /*if (response.err != undefined) {
-                     var msg = response.msg;
-                     console.log(response.err);
-                     }*/
-                    $('#popup_hero').html(response);
-                    HeroUpdate();
-                }).fail(function (response) {
-                    $('#popup_hero').html(response);
-                });
-                //$('.popup').hide();
-                //$('#popup_hero').html('');
-            }).on('click', '#hire_cancel', function (e) {
-                $('.popup').hide();
-                $('#popup_hero').html('');
-            });
             $('.hero-delete').on('click', function (e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();

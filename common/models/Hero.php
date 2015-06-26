@@ -7,12 +7,12 @@ use Yii;
 /**
  * This is the model class for table "heroes".
  *
- * @property string $id
- * @property string $id_user
- * @property string $id_stdhero
+ * @property integer $id
+ * @property integer $id_user
+ * @property integer $id_stdhero
  * @property string $title
- * @property string $hexp
- * @property string $hlevel
+ * @property integer $hexp
+ * @property integer $hlevel
  *
  * @property User $idUser
  * @property StdHero $idStdhero
@@ -43,8 +43,9 @@ class Hero extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_stdhero', 'title'], 'required'],
-            [['id_user', 'id_stdhero', 'hexp', 'hlevel'], 'integer'],
-            [['title'], 'string', 'max' => 50]
+            [['id', 'id_user', 'id_stdhero', 'hexp', 'hlevel'], 'integer'],
+            [['title'], 'string', 'max' => 50],
+            [['title', 'unique', 'targetAttribute' => ['title', 'id_user']]],
         ];
     }
 
