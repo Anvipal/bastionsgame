@@ -43,9 +43,9 @@ class Hero extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_stdhero', 'title'], 'required'],
-            [['id', 'id_user', 'id_stdhero', 'hexp', 'hlevel'], 'integer'],
+            [['id_user', 'id_stdhero', 'hexp', 'hlevel'], 'integer'],
             [['title'], 'string', 'max' => 50],
-            [['title', 'unique', 'targetAttribute' => ['title', 'id_user']]],
+            [['title'], 'unique', 'targetAttribute' => ['title', 'id_user']],
         ];
     }
 

@@ -22,9 +22,9 @@ use \yii\helpers\Url;
 
     <div>
         <?= isset($model->idQuest)
-            ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute('/quests/view', ['id' => $model->idQuest->id] ),['data-pjax' => 0])
-            : Html::a('Почати завдання', Url::toRoute('/quests'), ['data-pjax' => 0]);
+            ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute(['/quests/view', 'id' => $model->idQuest->id ]),['class' => 'btn btn-default','data-pjax' => 0])
+            : Html::a('Почати завдання', Url::toRoute(['/quests']), ['class' => 'btn btn-default', 'data-pjax' => 0]);
         ?>
-        <?= Html::a('Звільнити', Url::toRoute(['/heroes/delete', ['id' => $model->id]]) , ['class' => 'hero-delete', 'data-pjax' => 0]); ?>
+        <?= Html::a('Звільнити', Url::toRoute(['heroes/delete', 'id' => $model->id]) , ['class' => 'btn btn-default hero-delete', 'data-pjax' => 0]); ?>
     </div>
 </div>

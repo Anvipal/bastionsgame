@@ -14,7 +14,7 @@ use \yii\bootstrap\Modal;
 
 $this->title = 'Bastions - Heroes';
 
-Pjax::begin();
+Pjax::begin(['id' => 'hero_list']);
 
 echo ListView::widget([
     'dataProvider' => $heroes,
@@ -25,53 +25,34 @@ echo ListView::widget([
 ]);
 
 Pjax::end(); ?>
-<?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy']) ?>
+<?= Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hero_buy', 'class' => 'hero-buy btn btn-default']) ?>
 <?
 echo Modal::widget([
     'id' => 'hero_hire',
-    'header' => '<h4>Найняти нового героя</h4>' . Html::a('X', 'javascript:void(0);', ['class' => 'btn btn-popup-close', 'data-dismiss' => 'modal']),
-    'footer' => Html::a('Найняти героя', 'javascript:void(0);', ['id' => 'hire_accept']) . Html::a('Відмінити', 'javascript:void(0);', ['id' => 'hire_cancel']),
+    'header' => '<h4>Найняти нового героя</h4>',
+    'footer' => Html::button('Найняти героя', ['id' => 'hire_accept', 'class'=>'btn btn-primary']) . Html::button('Відмінити', ['data-dismiss' => 'modal', 'class'=>'btn btn-default']),
 ]);
 $this->registerJs(
-    '$(\'#hero_buy\').on(\'click\', function () {
+    "$('#hero_buy').on('click', function () {
             $.ajax({
-                url: \'/heroes/hire\',
-                type: \'GET\'
+                url: '/heroes/hire',
+                type: 'GET'
             }).done(function(data){
-                $(\'.modal-body\').html(data);
-                $(\'#hero_hire\').modal(\'show\');
+                $('.modal-body').html(data);
+                $('#hero_hire').modal('show');
             });
-        });'
-);
-?>
-
-<script>
-    (function () {
-        $(document).ready(function () {
-            function HeroUpdate() {
+        });
+        $('.hero-delete').on('click', function (e) {
                 $.ajax({
                     type: 'GET',
-                    url: '/heroes/'
-                }).done(function (response) {
-                    $('#hero_list').html(response);
-                });
-            }
-            $('.hero-delete').on('click', function (e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                $.ajax({
-                    type: 'GET',
-                    dataType: 'json',
                     url: $(e.target).prop('href')
                 }).done(function (response) {
-                    if (response.err != undefined) {
-                        var msg = response.msg;
-                        console.log(response.err);
-                    }
-                    HeroUpdate();
+                    $.pjax.reload({container:'#hero_list'});
                 });
                 return false;
             });
-        });
-    })();
-</script>
+
+        "
+
+);
+?>

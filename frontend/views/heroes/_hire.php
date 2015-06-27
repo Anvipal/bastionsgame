@@ -10,7 +10,7 @@
  */
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use common\models\StdHero;
 
 
@@ -21,8 +21,16 @@ $form = ActiveForm::begin([
         'enctype' => 'multipart/form-data'
     ]
 ]);
-echo $form->field($model, 'title')->textInput();
-echo $form->field($model, 'id_stdhero')->dropDownList(ArrayHelper::map(StdHero::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name'));
+?>
+    <div class="form-group">
+        <?= $form->field($model, 'title')->textInput(['class' => 'form-control']) ?>
+</div>
+<div class="form-group">
+    <?= $form->field($model, 'id_stdhero')->dropDownList(ArrayHelper::map(StdHero::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name')) ?>
+</div>
+
+
+<?
 ActiveForm::end();
 $this->registerJs("
     $('#hire_accept').on('click', function (e) {
@@ -31,10 +39,10 @@ $this->registerJs("
             type: 'POST',
             data: $('#hero_form').serialize()
         }).done(function (response) {
-            $('#hero_hire').html(response);
-            HeroUpdate();
+            $('.modal-body').html(response);
+            $.pjax.reload({container:'#hero_list'});
         }).fail(function (response) {
-            $('#hero_hire').html(response);
+            $('.modal-body').html(response);
         });
     });
     $('#hire_cancel').on('click', function (e) {

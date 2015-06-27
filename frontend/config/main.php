@@ -34,8 +34,7 @@ return [
             'showScriptName' => false,
             'rules'=>[
                 ''=>'site/index',
-                '<controller:\w+>/<id:\d+>' => '<controller>/index',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ]
         ],

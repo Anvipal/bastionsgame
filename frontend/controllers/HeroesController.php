@@ -34,7 +34,7 @@ class HeroesController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Hero::find(),
             'sort' => [
-                'defaultOrder' => [ 'title' => SORT_ASC ],
+                'defaultOrder' => ['title' => SORT_ASC],
             ],
             'pagination' => [
                 'pageSize' => 20,
@@ -76,24 +76,22 @@ class HeroesController extends Controller
     public function actionDelete()
     {
         $id = Yii::$app->request->get('id');
-        if (is_numeric($id)) {
-            if (Yii::$app->request->isAjax) {
-                $hero = Hero::find(['id' => $id])->one();
-                if ($hero) {
-                    if ($hero->delete()) {
-                        $answer = [
-                            'msg' => 'Герой був успішно видалений!'
-                        ];
-                        Yii::$app->response->format = 'json';
-                        return $answer;
-                    } else {
-                        $answer = [
-                            'msg' => 'Виникла помилка додавання героя',
-                            'err' => $hero->getFirstErrors()
-                        ];
-                        Yii::$app->response->format = 'json';
-                        return $answer;
-                    }
+        if (is_numeric($id) && Yii::$app->request->isAjax) {
+            $hero = Hero::find(['id' => $id])->one();
+            if ($hero) {
+                if ($hero->delete()) {
+                    $answer = [
+                        'msg' => 'Герой був успішно видалений!'
+                    ];
+                    Yii::$app->response->format = 'json';
+                    return $answer;
+                } else {
+                    $answer = [
+                        'msg' => 'Виникла помилка додавання героя',
+                        'err' => $hero->getFirstErrors()
+                    ];
+                    Yii::$app->response->format = 'json';
+                    return $answer;
                 }
             }
             return $this->redirect('/heroes/');
