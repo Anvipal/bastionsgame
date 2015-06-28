@@ -15,11 +15,9 @@ use \yii\helpers\Url;
 ?>
 <div class="hero-item">
     <div class="hero-inner-info">
-        <span class="hero-title"><?= $model->title ?></span>
+        <span class="hero-title"><?= $model->title ?></span><br/>
         <span><?= $model->idStdhero->name ?>, <?= $model->hlevel ?> рівень</span>
     </div>
-    <br/>
-
     <div>
         <?= isset($model->idQuest)
             ? 'Зараз на завданні' . '<br/>' . Html::a($model->idQuest->idStdQuest->title, Url::toRoute(['/quests/view', 'id' => $model->idQuest->id ]),['class' => 'btn btn-default','data-pjax' => 0])

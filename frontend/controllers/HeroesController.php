@@ -68,7 +68,6 @@ class HeroesController extends Controller
     }
 
     /**
-     * @param $id
      * @var $hero \common\models\Hero
      * @return array
      * @throws \yii\web\ForbiddenHttpException

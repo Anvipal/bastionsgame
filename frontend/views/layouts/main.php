@@ -22,6 +22,30 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<? \yii\bootstrap\NavBar::begin([
+    'brandLabel' => 'Bastions',
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => [
+        'class' => 'navbar-default'
+    ]
+]);
+
+echo Nav::widget([
+    'options' => [
+        'class' => 'navbar-nav navbar-left'
+    ],
+    'items' => [
+        [
+            'label' => 'Герої',
+            'url' => ['/heroes']
+        ],
+        [
+            'label' => 'Завдання',
+            'url' => ['/quests']
+        ]
+    ]
+]);
+NavBar::end(); ?>
 <div class="container">
     <?= $content ?>
 </div>

@@ -8,7 +8,6 @@ use common\models\Quest;
 
 $this->title = 'Bastion - Quests';
 ?>
-<div class="quests-index">
     <? foreach ($quests as $quest): ?>
         <div class="quest-info">
             <img class="quest-img" src=""/>
@@ -33,4 +32,3 @@ $this->title = 'Bastion - Quests';
             </div>
         </div>
     <? endforeach; ?>
-</div>

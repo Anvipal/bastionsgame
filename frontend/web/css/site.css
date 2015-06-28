@@ -16,3 +16,9 @@ body {
 .popup {
     display: none;
 }
+
+.hero-item{
+    border: #3276b1 solid 2px;
+    margin-bottom: 6px;
+    padding: 2px;
+}
