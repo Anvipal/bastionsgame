@@ -19,9 +19,12 @@ use yii\helpers\ArrayHelper;
  * @property StdQuest $idStdquest
  * @property User $user
  * @property StdObstacle $obstacles
+ * @property Hero[] $heroes
  */
 class Quest extends \yii\db\ActiveRecord
 {
+    private $hero_cnt;
+
     const MAX_QUESTS = 4;
 
     const ST_NEW = 0;
@@ -53,6 +56,8 @@ class Quest extends \yii\db\ActiveRecord
         return [
             [['id_user'], 'required'],
             [['id_user', 'midhlevel', 'chance', 'timestart', 'status', 'id_stdquests'], 'integer'],
+            [['hero_cnt'], 'default', 'value' => $this->idStdquest->hcnt],
+            [['hero_cnt'], 'compare', 'compareAttribute' => count($this->heroes->all())],
         ];
     }
 

@@ -24,17 +24,21 @@ class QuestsController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Quest::find(['user_id' => 1])
-                ->where(['status' => Quest::ST_IN_PROCESS ])
+                ->where(['status' => Quest::ST_IN_PROCESS])
                 ->orderBy('midhlevel desc')
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        if ($dataProvider->totalCount == 0) {
+            return $this->redirect(['/quests/new-quests']);
+        }
+        return $this->render('newqests', ['dataProvider' => $dataProvider]);
+
     }
 
     public function actionNewQuests()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Quest::find(['user_id' => 1])
-                ->where(['status' => Quest::ST_NEW ])
+                ->where(['status' => Quest::ST_NEW])
                 ->orderBy('midhlevel desc')
         ]);
         return $this->render('newqests', ['dataProvider' => $dataProvider]);
@@ -49,11 +53,14 @@ class QuestsController extends Controller
         if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->get('id');
             if ($model = $this->findModel($id, Quest::ST_NEW)) {
-                /* @var $model Quest */
-                $model->timestart = time();
-                $model->status = Quest::ST_IN_PROCESS;
-                if ($model->save()) {
-                    return $this->redirect(['/quests/new-quests']);
+                if (count($model->heroes->all()) == $model->idStdquest->hcnt)
+                {
+                    /* @var $model Quest */
+                    $model->timestart = time();
+                    $model->status = Quest::ST_IN_PROCESS;
+                    if ($model->save()) {
+                        return $this->redirect(['/quests/new-quests']);
+                    }
                 }
                 $this->renderAjax('_start_quest', ['model' => $model]);
             }
@@ -63,7 +70,7 @@ class QuestsController extends Controller
 
     public function actionSelectHero()
     {
-        $dataProvider = Hero::find()->join('left','questsheroes',['id_hero' => 'id'])->andWhere(['is', 'id_hero', 'NULL']);
+        $dataProvider = Hero::find()->join('left', 'questsheroes', ['id_hero' => 'id'])->andWhere(['is', 'id_hero', 'NULL']);
         //return $this->renderAjax()
     }
 
