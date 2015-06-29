@@ -18,6 +18,6 @@ class ServerController extends \yii\console\Controller
 
     public function actionIndex()
     {
-        Quest::userquestupdate();
+        Quest::userQuestUpdate();
     }
 }
