@@ -54,10 +54,10 @@ class Quest extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user'], 'required'],
+            [['id_user', 'id_stdquest'], 'required'],
             [['id_user', 'midhlevel', 'chance', 'timestart', 'status', 'id_stdquests'], 'integer'],
             [['hero_cnt'], 'default', 'value' => $this->idStdquest->hcnt],
-            [['hero_cnt'], 'compare', 'compareAttribute' => count($this->heroes->all())],
+            [['hero_cnt'], 'compare', 'compareValue' => count($this->heroes), 'operator' => '=='],
         ];
     }
 
@@ -70,7 +70,6 @@ class Quest extends \yii\db\ActiveRecord
             'id_user' => 'User ID',
             'midhlevel' => 'Midhlevel',
             'chance' => 'Chance',
-            'timetodo' => 'Timetodo',
             'timestart' => 'Timestart',
             'status' => 'Status',
             'id_stdquests' => 'Stdquests ID',
