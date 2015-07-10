@@ -30,6 +30,8 @@ class StdHero extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'unique'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 50]
         ];
     }
@@ -41,7 +43,7 @@ class StdHero extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Клас',
         ];
     }
 

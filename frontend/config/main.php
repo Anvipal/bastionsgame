@@ -34,8 +34,8 @@ return [
             'showScriptName' => false,
             'rules'=>[
                 ''=>'site/index',
-                '<controller:\w+>/<id:\d+>' => '<controller>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:(\w(-\w)?)+>/<action:(\w(-\w)?)+>/<id:\d+>' => '<controller><action>',
+                '<controller:(\w(-\w)?)+>/<action:(\w(-\w)?)+>/<param:[a-zA-Z0-9_-]+>' => '<controller>/<action>',
             ]
         ],
     ],
