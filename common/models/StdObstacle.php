@@ -10,6 +10,7 @@ use Yii;
  * @property string $id
  * @property string $title
  *
+ * @property StdHeroSkill[] $idHeroskills
  * @property StdHero[] $idStdheroes
  * @property StdQuest[] $idQuests
  */
@@ -29,7 +30,9 @@ class StdObstacle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            [['title'], 'unique'],
+            [['title'], 'required'],
         ];
     }
 
@@ -40,16 +43,16 @@ class StdObstacle extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Назва',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStdObstacleheroes()
+    public function getIdHeroskills()
     {
-        return $this->hasMany(StdObstaclehero::className(), ['id_stdobstacle' => 'id']);
+        return $this->hasMany(StdHeroSkill::className(), ['id_stdobstacle' => 'id']);
     }
 
     /**
@@ -57,15 +60,7 @@ class StdObstacle extends \yii\db\ActiveRecord
      */
     public function getIdStdheroes()
     {
-        return $this->hasMany(StdHeroes::className(), ['id' => 'id_stdhero'])->viaTable('std_obstaclehero', ['id_stdobstacle' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStdObstaclequests()
-    {
-        return $this->hasMany(StdObstaclequest::className(), ['id_obstacle' => 'id']);
+        return $this->hasMany(StdHero::className(), ['id' => 'id_stdhero'])->viaTable('std_obstaclehero', ['id_stdobstacle' => 'id']);
     }
 
     /**
@@ -73,6 +68,6 @@ class StdObstacle extends \yii\db\ActiveRecord
      */
     public function getIdQuests()
     {
-        return $this->hasMany(StdQuests::className(), ['id' => 'id_quest'])->viaTable('std_obstaclequest', ['id_obstacle' => 'id']);
+        return $this->hasMany(StdQuest::className(), ['id' => 'id_quest'])->viaTable('std_obstaclequest', ['id_obstacle' => 'id']);
     }
 }

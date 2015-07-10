@@ -42,6 +42,14 @@ echo Nav::widget([
         [
             'label' => 'Завдання',
             'url' => ['/quests']
+        ],
+        [
+            'label' => 'Переваги',
+            'url' => ['/skills']
+        ],
+        [
+            'label' => 'Перешкоди',
+            'url' => ['/obstacles']
         ]
     ]
 ]);
