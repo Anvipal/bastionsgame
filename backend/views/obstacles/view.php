@@ -7,13 +7,13 @@
  */
 /**
  * @var $this yii\web\View
- * @var $model common\models\StdHero
+ * @var $model common\models\StdObstacle
  */
 
 ?>
 <div class="heroes-view popup-content new-view">
     <div class="heroes-name-wrap">
-        <span><?= $model->getAttributeLabel('name'); ?></span>
-        <span><?= $model->name; ?></span>
+        <span><?= $model->getAttributeLabel('title'); ?></span>
+        <span><?= $model->title; ?></span>
     </div>
 </div>

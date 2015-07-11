@@ -27,7 +27,7 @@ $this->title = 'Редактор перешкод';
             ]
         ],
         'columns' => [
-            ['attribute' => 'title']
+           'title',
         ]
     ]); ?>
     <? \yii\widgets\Pjax::end(); ?>

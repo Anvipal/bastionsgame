@@ -39,18 +39,19 @@ echo Nav::widget([
             'label' => 'Герої',
             'url' => ['/heroes']
         ],
+
+        [
+            'label' => 'Перешкоди',
+            'url' => ['/obstacles'],
+        ],
         [
             'label' => 'Завдання',
-            'url' => ['/quests']
+            'url' => ['/quests'],
         ],
         [
             'label' => 'Переваги',
-            'url' => ['/skills']
+            'url' => ['/skills'],
         ],
-        [
-            'label' => 'Перешкоди',
-            'url' => ['/obstacles']
-        ]
     ]
 ]);
 NavBar::end(); ?>

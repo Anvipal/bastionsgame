@@ -8,7 +8,7 @@
 
 /**
  * @var $this yii\web\View
- * @var $model common\models\StdHero
+ * @var $model common\models\StdObstacle
  * @var $form yii\bootstrap\ActiveForm
  */
 
@@ -18,14 +18,14 @@
     'options' => [
         'class' => 'form-fill',
         'data-ajax' => 1,
-        'data-grid-view' => '#grid-view-heroes',
-        'data-pjax-container' => '#pjax-heroes',
+        'data-grid-view' => '#grid-view-obstacles',
+        'data-pjax-container' => '#pjax-obstacles',
     ]
 ]); ?>
-<?= $form->field($model, 'name')->textInput(); ?>
+<?= $form->field($model, 'title')->textInput(); ?>
 <div class="form-group confirm-btn-wrap">
     <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? 'Створити' : 'Зберегти', [
-        'class' => $model->isNewRecord ? 'btn-ok btn btn-ok-mini' : 'btn-ok btn btn-ok-mini'
+        'class' => 'btn-ok btn btn-ok-mini'
     ]); ?>
 </div>
 <? \yii\bootstrap\ActiveForm::end(); ?>

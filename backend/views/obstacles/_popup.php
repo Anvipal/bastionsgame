@@ -25,7 +25,7 @@ use yii\helpers\Url;
     'template' => $model->isNewRecord ? '' : ('{view} {update} {delete}'),
     'buttons' => [
         'delete' => [
-            'url' => '#delete-hero',
+            'url' => '#delete-obstacle',
             'title' => 'Видалити',
         ]
     ],
@@ -34,8 +34,8 @@ use yii\helpers\Url;
 <?= \backend\widgets\popup\mainContent::widget(['content' => $content]); ?>
 
 <?= \backend\widgets\popup\confirmContent::widget([
-    'id' => 'delete-hero',
-    'url' => Url::to(['heroes/delete', 'id' => $model->id]),
+    'id' => 'delete-obstacle',
+    'url' => Url::to(['obstacles/delete', 'id' => $model->id]),
     'content' => 'Ви хочете видалити героя?',
-    'pjaxUpdate' => 'pjax-heroes'
+    'pjaxUpdate' => 'pjax-obstacles'
 ]); ?>
