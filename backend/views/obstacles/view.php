@@ -13,8 +13,8 @@
 $this->title = \Yii::t('backend','TITLE_STDOBSTACLE_VIEW')
 
 ?>
-<div class="heroes-view popup-content new-view">
-    <div class="heroes-name-wrap">
+<div class="obstacle-view popup-content new-view">
+    <div class="obstacle-title-wrap">
         <span><?= $model->getAttributeLabel('title'); ?></span>
         <span><?= $model->title; ?></span>
     </div>

@@ -8,13 +8,13 @@
 
 /**
  * @var $this yii\web\View
- * @var $model common\models\StdHero
+ * @var $model common\models\StdQuest
  */
 
-$this->title = \Yii::t('backend','TITLE_STDOBSTACLE_CREATE');
+$this->title = Yii::t('backend','TITLE_STDHERO_CREATE');
 
 ?>
-<div class="obstacle-create">
+<div class="quests-create">
     <?= $this->render('_form', [
         'model' => $model,
     ]); ?>

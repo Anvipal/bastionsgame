@@ -26,3 +26,4 @@ use yii\helpers\Url;
 ]); ?>
 
 <?= \backend\widgets\popup\mainContent::widget(['content' => $content]); ?>
+

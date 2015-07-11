@@ -15,7 +15,7 @@
 $this->title = \Yii::t('backend','TITLE_STDHEROSKILL_CREATE');
 
 ?>
-<div class="heroes-create">
+<div class="skill-create">
     <?= $this->render('_form', [
         'model' => $model,
         'dropdownlists' => $dropdownlists,

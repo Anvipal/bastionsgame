@@ -14,10 +14,10 @@
 $this->title = \Yii::t('backend','TITLE_STDHEROSKILLS_EDITOR');
 ?>
 <h1 class="main-title"><?= \yii\bootstrap\Html::encode($this->title); ?></h1>
-<div class="heroes-index summary_table">
-    <? \yii\widgets\Pjax::begin(['id' => 'pjax-heroes', 'options'=>['class'=>'main-grid-block']]) ?>
+<div class="skills-index summary_table">
+    <? \yii\widgets\Pjax::begin(['id' => 'pjax-skills', 'options'=>['class'=>'main-grid-block']]) ?>
     <?=\backend\components\grid\GridView::widget([
-        'id'=>'grid-view-heroes',
+        'id'=>'grid-view-skills',
         'dataProvider' => $dataProvider,
         'columns' => [
             'name',

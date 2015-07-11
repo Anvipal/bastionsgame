@@ -13,5 +13,9 @@ return [
      'TAB_UPDATE'=>'Оновлення', 
      'BUTTON_CANCEL'=>'Відмінити', 
      'BUTTON_OK'=>'Ок', 
-     'BUTTON_UPDATE'=>'Оновити',
+     'BUTTON_UPDATE'=>'Оновити', 
+     'BUTTON_BACK'=>'Назад',
+     'MSG_STDHEROSKILL_NOTFOUND'=>'Перевага не знайдена',
+     'TITLE_ACTIONS'=>'Дії',
+     'MSG_GRID_DELETE'=>'Видалити?',
 ];

@@ -19,8 +19,8 @@
     'options' => [
         'class' => 'form-fill',
         'data-ajax' => 1,
-        'data-grid-view' => '#grid-view-heroes',
-        'data-pjax-container' => '#pjax-heroes',
+        'data-grid-view' => '#grid-view-skills',
+        'data-pjax-container' => '#pjax-skills',
     ]
 ]); ?>
 <?= $form->field($model, 'id_stdhero')->hiddenInput()->label(false); ?>
@@ -35,5 +35,6 @@ else
         <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? \Yii::t('common','BUTTON_CREATE') : \Yii::t('common','BUTTON_SAVE'), [
             'class' => 'btn-ok btn btn-ok-mini'
         ]); ?>
+        <?= \yii\bootstrap\Html::a(Yii::t('common','BUTTON_BACK'),\yii\helpers\Url::to(['view', 'id'=>$model->id_stdhero]),['class' => 'btn btn-cancel btn-cancel-mini']) ?>
     </div>
 <? \yii\bootstrap\ActiveForm::end(); ?>

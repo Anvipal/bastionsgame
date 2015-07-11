@@ -9,11 +9,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\StdHero */
+/* @var $model common\models\StdQuest */
 
-$this->title = \Yii::t('backend','TITLE_STDOBSTACLE_UPDATE');
+$this->title = Yii::t('backend','TITLE_STDHERO_UPDATE');
 ?>
-<div class="obstacle-update">
+<div class="quests-update">
     <?= $this->render('_form', [
         'model' => $model,
     ]); ?>

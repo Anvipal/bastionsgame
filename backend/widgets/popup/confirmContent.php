@@ -19,13 +19,14 @@ class confirmContent extends Widget{
     public $content;
     public $title;
     public $pjaxUpdate = false;
+    public $backUrl;
     public function run(){
 
         //$this->id = $this->id.'_confirm_button';
 
         $tmp = '';//Html::tag('a',$this->title,['href'=>"#{$this->id}", 'class'=>'popup-tab']);
 
-        $cancel=Html::tag('a',Yii::t('common','BUTTON_CANCEL'),['class'=>'btn-cancel btn btn-cancel-mini','rel'=>'close','href'=>'#']);
+        $cancel=Html::tag('a',Yii::t('common','BUTTON_CANCEL'),['class'=>'btn-cancel btn btn-cancel-mini'.($this->backUrl?' popup-tab':''),'rel'=>'close','href'=> $this->backUrl ?: '#']);
 
         $ok=Html::tag('a',Yii::t('common','BUTTON_OK'),['class'=>'btn-ok btn btn-ok-mini','href'=>$this->url, 'id'=>'btn-ok-'.$this->id ]);
 

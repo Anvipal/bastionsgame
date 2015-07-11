@@ -20,4 +20,5 @@ return [
      'TITLE_STDHEROSKILL_POPUP'=>'Перевага', 
      'STDHERO_SKILLS'=>'Переваги', 
      'TITLE_STDOBSTACLE_VIEW'=>'TITLE_STDOBSTACLE_VIEW', 
+     'TITLE_MAIN_PAGE'=>'TITLE_MAIN_PAGE', 
 ];

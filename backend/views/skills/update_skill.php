@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 $this->title = \Yii::t('backend','TITLE_SKILL_UPDATE');
 ?>
-<div class="heroes-update">
+<div class="skill-update">
     <?= $this->render('_form', [
         'model' => $model,
         'dropdownlists' => $dropdownlists

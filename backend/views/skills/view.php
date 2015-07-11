@@ -21,7 +21,7 @@ use yii\helpers\Url;
         'dataProvider' => $dataProvider,
         'footerButtons' => [
             [
-                'title' => \Yii::t('backend','STDHEROSKILL_ADD_BUTTON'),
+                'title' => \Yii::t('backend', 'STDHEROSKILL_ADD_BUTTON'),
                 'url' => ['create-skill', 'id_stdhero' => $model->id],
                 'class' => 'new-add grey-btn btn'
             ]
@@ -34,19 +34,35 @@ use yii\helpers\Url;
             ],
             [
                 'class' => 'backend\components\grid\ButtonColumn',
-                'template' => '{edit} {delete}',
+                'template' => '{update} {delete}',
                 'buttons' => [
-                    'edit' => function($url, $model){
+                    'update' => function ($url, $model) {
                         /** @var $model common\models\StdHeroSkill */
-                        return Html::a(\Yii::t('common','BUTTON_UPDATE'), Url::to(['edit-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
+                        return Html::a(\Yii::t('common', 'BUTTON_UPDATE'), Url::to(['update-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]), ['title' => Yii::t('common', 'BUTTON_UPDATE'), 'data-pjax' => '0']);
                     },
-                    'delete' => function($url, $model){
+                    'delete' => function ($url, $model) {
                         /** @var $model common\models\StdHeroSkill */
-                        return Html::a(\Yii::t('common','BUTTON_DELETE'), Url::to(['delete-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
+                        return Html::a(\Yii::t('common', 'BUTTON_DELETE'), Url::to(['delete-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]), ['data-confirm' => Yii::t('common', 'MSG_GRID_DELETE'), 'title' => Yii::t('common', 'BUTTON_DELETE'), 'data-method' => 'POST']);
                     }
                 ]
             ]
         ]
     ])
+    ?>
+    <?
+    $this->registerJs(
+        <<<JS
+    $("#skills-grid").on("click", "tbody tr", function (e) {
+    console.log(e.target.tagName);
+    if(e.target.tagName != 'A')
+    {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return false;
+    }
+    return true;
+    });
+JS
+    )
     ?>
 </div>
