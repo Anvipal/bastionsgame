@@ -23,7 +23,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <? NavBar::begin([
-    'brandLabel' => 'Bastions',
+    'brandLabel' => 'Admin Bastions',
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-default'
@@ -36,20 +36,20 @@ echo Nav::widget([
     ],
     'items' => [
         [
-            'label' => 'Герої',
+            'label' => Yii::t('backend','NAV_STDHEROES'),
             'url' => ['/heroes']
         ],
 
         [
-            'label' => 'Перешкоди',
+            'label' => Yii::t('backend','NAV_STDOBSTACLES'),
             'url' => ['/obstacles'],
         ],
         [
-            'label' => 'Завдання',
+            'label' => Yii::t('backend','NAV_STDQUESTS'),
             'url' => ['/quests'],
         ],
         [
-            'label' => 'Переваги',
+            'label' => Yii::t('backend','NAV_STDHEROSKILLS'),
             'url' => ['/skills'],
         ],
     ]

@@ -11,7 +11,7 @@
  * @var $dataProvider yii\data\ActiveDataProvider;
  */
 
-$this->title = 'Редактор перешкод';
+$this->title = \Yii::t('backend','TITLE_STDOBSTACLES_EDITOR');
 ?>
 <h1 class="main-title"><?= \yii\bootstrap\Html::encode($this->title); ?></h1>
 <div class="obstacles-index summary_table">
@@ -21,7 +21,7 @@ $this->title = 'Редактор перешкод';
         'dataProvider' => $dataProvider,
         'footerButtons' => [
             [
-                'title' => 'Додати перешкоду',
+                'title' => \Yii::t('backend','STDOBSTACLE_ADD_BUTTON'),
                 'url' => ['create'],
                 'class' => 'new-add grey-btn btn'
             ]

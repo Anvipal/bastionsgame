@@ -11,7 +11,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\StdHero */
 
-$this->title = 'Оновити';
+$this->title = Yii::t('backend','TITLE_STDHERO_UPDATE');
 ?>
 <div class="heroes-update">
     <?= $this->render('_form', [

@@ -34,7 +34,7 @@ class Tabs extends Widget {
         if( $this->model ) {
             if (!isset($this->buttons['view'])) {
                 $this->buttons['view'] = [
-                    'title' => 'Перегляд',//Yii::t('app', 'View'),
+                    'title' => Yii::t('common', 'TAB_VIEW'),
                     'url' => Url::to(ArrayHelper::merge([
                         ($this->controller ? $this->controller.'/view':'view'),
                         'id' => $this->model->getPrimaryKey()
@@ -43,7 +43,7 @@ class Tabs extends Widget {
             }
             if (!isset($this->buttons['update'])) {
                 $this->buttons['update'] = [
-                    'title' => 'Оновити',//Yii::t('app', 'Update'),
+                    'title' => Yii::t('common', 'TAB_UPDATE'),
                     'url' => Url::to(ArrayHelper::merge([
                         ($this->controller ? $this->controller.'/update':'update'),
                         'id' => $this->model->getPrimaryKey()
@@ -51,7 +51,7 @@ class Tabs extends Widget {
                 ];
             }
         } else {
-            throw new \Exception('Tabs не додано!', 500);
+            throw new \Exception(Yii::t('backend','MSG_MODEL_NOT_ADDED'), 500);
         }
 
     }

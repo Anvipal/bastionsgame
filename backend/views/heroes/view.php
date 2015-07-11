@@ -10,10 +10,23 @@
  * @var $model common\models\StdHero
  */
 
+$this->title = Yii::t('backend','TITLE_STDHERO_VIEW')
+
 ?>
 <div class="heroes-view popup-content new-view">
     <div class="heroes-name-wrap">
         <span><?= $model->getAttributeLabel('name'); ?></span>
         <span><?= $model->name; ?></span>
+    </div>
+    <div class="heroes-skills-wrap">
+        <? foreach($model->idStdSkills as $skill): ?>
+            <h6><?= Yii::t('backend','STDHERO_SKILLS') ?></h6>
+            <span><?= $skill->getAttributeLabel('title'); ?></span>
+            <span><?= $skill->title; ?></span>
+            <div class="heroes-skills-obscales-wrap">
+                <span><?= $skill->idStdobstacle->getAttributeLabel('title') ?></span>
+                <span><?= $skill->idStdobstacle->title; ?></span>
+            </div>
+        <? endforeach; ?>
     </div>
 </div>

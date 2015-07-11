@@ -10,6 +10,8 @@
  * @var $model common\models\StdObstacle
  */
 
+$this->title = \Yii::t('backend','TITLE_STDOBSTACLE_VIEW')
+
 ?>
 <div class="heroes-view popup-content new-view">
     <div class="heroes-name-wrap">

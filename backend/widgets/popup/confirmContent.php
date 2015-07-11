@@ -25,9 +25,9 @@ class confirmContent extends Widget{
 
         $tmp = '';//Html::tag('a',$this->title,['href'=>"#{$this->id}", 'class'=>'popup-tab']);
 
-        $cancel=Html::tag('a',Yii::t('app','Cancel'),['class'=>'btn-cancel btn btn-cancel-mini','rel'=>'close','href'=>'#']);
+        $cancel=Html::tag('a',Yii::t('common','BUTTON_CANCEL'),['class'=>'btn-cancel btn btn-cancel-mini','rel'=>'close','href'=>'#']);
 
-        $ok=Html::tag('a',Yii::t('app','Ok'),['class'=>'btn-ok btn btn-ok-mini','href'=>$this->url, 'id'=>'btn-ok-'.$this->id ]);
+        $ok=Html::tag('a',Yii::t('common','BUTTON_OK'),['class'=>'btn-ok btn btn-ok-mini','href'=>$this->url, 'id'=>'btn-ok-'.$this->id ]);
 
         $content = Html::tag('div', $this->content, [ 'class'=>'confim_message' ]);
 

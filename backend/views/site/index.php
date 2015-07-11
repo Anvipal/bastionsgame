@@ -1,5 +1,5 @@
 <?php
 /* @var $this yii\web\View */
 
-$this->title = 'Admin Panel - Main';
+$this->title = \Yii::t('backend','TITLE_MAIN_PAGE');
 ?>

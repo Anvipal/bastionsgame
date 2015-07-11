@@ -9,13 +9,15 @@
 /**
  * @var $this yii\web\View
  * @var $model common\models\StdHeroSkill
+ * @var $dropdownlists array
  */
 
-$this->title = 'Створити героя';
+$this->title = \Yii::t('backend','TITLE_STDHEROSKILL_CREATE');
 
 ?>
 <div class="heroes-create">
     <?= $this->render('_form', [
         'model' => $model,
+        'dropdownlists' => $dropdownlists,
     ]); ?>
 </div>

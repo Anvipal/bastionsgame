@@ -11,7 +11,7 @@
  * @var $dataProvider yii\data\ActiveDataProvider;
  */
 
-$this->title = 'Редактор переваг';
+$this->title = \Yii::t('backend','TITLE_STDHEROSKILLS_EDITOR');
 ?>
 <h1 class="main-title"><?= \yii\bootstrap\Html::encode($this->title); ?></h1>
 <div class="heroes-index summary_table">

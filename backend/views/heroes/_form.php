@@ -24,8 +24,8 @@
 ]); ?>
 <?= $form->field($model, 'name')->textInput(); ?>
 <div class="form-group confirm-btn-wrap">
-    <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? 'Створити' : 'Зберегти', [
-        'class' => $model->isNewRecord ? 'btn-ok btn btn-ok-mini' : 'btn-ok btn btn-ok-mini'
+    <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? \Yii::t('common','BUTTON_CREATE') : \Yii::t('common','BUTTON_SAVE'), [
+        'class' => 'btn-ok btn btn-ok-mini'
     ]); ?>
 </div>
 <? \yii\bootstrap\ActiveForm::end(); ?>

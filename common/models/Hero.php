@@ -56,11 +56,10 @@ class Hero extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_user' => 'Власник',
-            'id_stdhero' => 'Клас',
-            'title' => 'Ім\'я',
-            'hexp' => 'Досвід',
-            'hlevel' => 'Рівень',
+            'id_stdhero' => \Yii::t('common','STDHERO_ATTR_NAME'),
+            'title' => \Yii::t('common','HERO_ATTR_TITLE'),
+            'hexp' => \Yii::t('common','HERO_ATTR_EXP'),
+            'hlevel' => \Yii::t('common','HERO_LEVEL'),
         ];
     }
 

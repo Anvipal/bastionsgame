@@ -43,7 +43,7 @@ class StdHero extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Клас',
+            'name' => Yii::t('common','STDHERO_ATTR_NAME'),//'Клас',
         ];
     }
 

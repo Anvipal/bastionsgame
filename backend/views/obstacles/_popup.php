@@ -16,7 +16,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="header">
-    <div id="popup-title">Герой</div>
+    <div id="popup-title"><?= \Yii::t('backend','TITLE_STDOBSTACLE_POPUP') ?></div>
     <div class="close">X</div>
 </div>
 
@@ -36,6 +36,6 @@ use yii\helpers\Url;
 <?= \backend\widgets\popup\confirmContent::widget([
     'id' => 'delete-obstacle',
     'url' => Url::to(['obstacles/delete', 'id' => $model->id]),
-    'content' => 'Ви хочете видалити героя?',
+    'content' => \Yii::t('backend','MSG_STDOBSTACLE_DELETE_CONFORM'),
     'pjaxUpdate' => 'pjax-obstacles'
 ]); ?>

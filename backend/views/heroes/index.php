@@ -11,7 +11,7 @@
  * @var $dataProvider yii\data\ActiveDataProvider;
  */
 
-$this->title = 'Редактор героїв';
+$this->title = Yii::t('backend','TITLE_STDHERO_EDITOR');
 ?>
 <h1 class="main-title"><?= \yii\bootstrap\Html::encode($this->title); ?></h1>
 <div class="heroes-index summary_table">
@@ -21,7 +21,7 @@ $this->title = 'Редактор героїв';
         'dataProvider' => $dataProvider,
         'footerButtons' => [
             [
-                'title' => 'Додати героя',
+                'title' => Yii::t('backend','STDHERO_ADD_BUTTON'), //'Додати героя',
                 'url' => ['create'],
                 'class' => 'new-add grey-btn btn'
             ]

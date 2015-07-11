@@ -47,12 +47,10 @@ class StdQuest extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'desc' => 'Desc',
-            'midhlevel' => 'Midhlevel',
-            'hcnt' => 'Hcnt',
-            'obscales' => 'Obscales',
-            'timetodo' => 'Timetodo',
+            'name' => \Yii::t('common','STDQUEST_ATTR_NAME'),
+            'desc' => \Yii::t('common','STDQUEST_ATTR_DESCRIPTION'),
+            'midhlevel' => \Yii::t('common','STDQUEST_ATTR_MIDLEVEL'),
+            'timetodo' => \Yii::t('common','STDQUEST_ATTR_TIMETODO'),
         ];
     }
 

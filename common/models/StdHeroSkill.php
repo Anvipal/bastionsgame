@@ -32,7 +32,8 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     {
         return [
             [['id_stdobstacle', 'id_stdhero'], 'required'],
-            [['id_stdobstacle', 'id_stdhero', 'slevel', 'title'], 'integer']
+            [['id_stdobstacle', 'id_stdhero', 'slevel'], 'integer'],
+            [['title'], 'string', 'max' => 150],
         ];
     }
 
@@ -42,10 +43,10 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_stdobstacle' => 'Id Stdobstacle',
-            'id_stdhero' => 'Id Stdhero',
+            'id_stdhero' => Yii::t('common','STDHERO_ATTR_CLASSNAME'),
+            'id_stdobstacle' => Yii::t('common','STDOBSTACLE_ATTR_CLASSNAME'),
             'slevel' => 'Slevel',
-            'title' => 'Title',
+            'title' => \Yii::t('common','STDHEROSKILL_ATTR_TITLE'),
         ];
     }
 

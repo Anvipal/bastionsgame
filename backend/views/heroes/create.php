@@ -11,7 +11,7 @@
  * @var $model common\models\StdHero
  */
 
-$this->title = 'Створити героя';
+$this->title = Yii::t('backend','TITLE_STDHERO_CREATE');
 
 ?>
 <div class="heroes-create">

@@ -17,7 +17,11 @@ use yii\web\Response;
 class Controller extends \yii\web\Controller
 {
 
-
+    /**
+     * @param $url
+     * @param array $array
+     * @return array|Response
+     */
     public function redirectAuto($url, $array = [])
     {
         if (Yii::$app->request->isAjax)
@@ -27,6 +31,11 @@ class Controller extends \yii\web\Controller
         else
             return $this->redirect(($url === false ? ['index'] : $url));
     }
+
+    /**
+     * @param array $array
+     * @return array
+     */
 
     public function renderJson($array = [])
     {
@@ -38,6 +47,13 @@ class Controller extends \yii\web\Controller
         ], $array);
     }
 
+    /**
+     * @param $view
+     * @param null $viewAjax
+     * @param array $params
+     * @return null|string
+     * @throws \Exception
+     */
     public function renderAuto($view, $viewAjax = null, $params = [])
     {
         $viewAjax = $viewAjax == null ? $view : $viewAjax;

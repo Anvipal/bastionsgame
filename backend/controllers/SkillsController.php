@@ -11,7 +11,9 @@ namespace backend\controllers;
 use backend\components\Controller;
 use common\models\StdHero;
 use common\models\StdHeroSkill;
+use common\models\StdObstacle;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class SkillsController extends Controller
@@ -37,14 +39,16 @@ class SkillsController extends Controller
         ]);
     }
 
-    public function actionCreateSkill()
+    public function actionCreateSkill($id_stdhero)
     {
         $model = new StdHeroSkill();
-        if ($model->load(\Yii::$app->request->get()) && $model->save()) {
-            $this->redirectAuto(['view', 'id' => $model->id_stdhero]);
+        $model->id_stdhero = $id_stdhero;
+        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+            return $this->redirectAuto(['view', 'id' => $model->id_stdhero]);
         }
         return $this->renderAuto('create_skill', '_form', [
-            'model' => $model
+            'model' => $model,
+            'dropdownlists' => $this->dropDownArrays(),
         ]);
     }
 
@@ -57,6 +61,7 @@ class SkillsController extends Controller
         }
         return $this->renderAuto('update_skill', '_form', [
             'model' => $model,
+            'dropdownlists' => $this->dropDownArrays(),
         ]);
     }
 
@@ -79,7 +84,7 @@ class SkillsController extends Controller
         if (($model = StdHeroSkill::findOne(['id_stdhero' => $id_h, 'id_stdobstacle' => $id_o])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('Герой не знайдений');
+        throw new NotFoundHttpException(\Yii::t('common','MSG_STDHEROSKILL_NOTFOUND'));
     }
 
     /**
@@ -92,6 +97,13 @@ class SkillsController extends Controller
         if (($model = StdHero::findOne(['id' => $id])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('Герой не знайдений');
+        throw new NotFoundHttpException(\Yii::t('common','MSG_STDHERO_NORFOUND'));
+    }
+
+    public function dropDownArrays()
+    {
+        return [
+            'stdobstacles' => ArrayHelper::map(StdObstacle::find()->all(),'id','title'),
+        ];
     }
 }

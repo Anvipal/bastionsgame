@@ -16,13 +16,13 @@ use yii\helpers\Url;
 
 ?>
 <div class="skills-view popup-content new-view">
-    <? \backend\components\grid\GridView::widget([
+    <?= \backend\components\grid\GridView::widget([
         'id' => 'skills-grid',
         'dataProvider' => $dataProvider,
         'footerButtons' => [
             [
-                'title' => 'Додати перевагу',
-                'url' => ['create-skill'],
+                'title' => \Yii::t('backend','STDHEROSKILL_ADD_BUTTON'),
+                'url' => ['create-skill', 'id_stdhero' => $model->id],
                 'class' => 'new-add grey-btn btn'
             ]
         ],
@@ -38,11 +38,11 @@ use yii\helpers\Url;
                 'buttons' => [
                     'edit' => function($url, $model){
                         /** @var $model common\models\StdHeroSkill */
-                        return Html::a('Редагувати', Url::to(['edit-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
+                        return Html::a(\Yii::t('common','BUTTON_UPDATE'), Url::to(['edit-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
                     },
                     'delete' => function($url, $model){
                         /** @var $model common\models\StdHeroSkill */
-                        return Html::a('Видалити', Url::to(['delete-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
+                        return Html::a(\Yii::t('common','BUTTON_DELETE'), Url::to(['delete-skill', 'id_stdhero' => $model->id_stdhero, 'id_stdobstacle' => $model->id_stdobstacle]));
                     }
                 ]
             ]

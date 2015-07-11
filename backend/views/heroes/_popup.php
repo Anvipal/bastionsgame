@@ -16,7 +16,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="header">
-    <div id="popup-title">Герой</div>
+    <div id="popup-title"><?= \Yii::t('backend','TITLE_STDHERO_POPUP') ?></div>
     <div class="close">X</div>
 </div>
 
@@ -26,7 +26,7 @@ use yii\helpers\Url;
     'buttons' => [
         'delete' => [
             'url' => '#delete-hero',
-            'title' => 'Видалити',
+            'title' => \Yii::t('common','BUTTON_DELETE'),
         ]
     ],
 ]); ?>
@@ -36,6 +36,6 @@ use yii\helpers\Url;
 <?= \backend\widgets\popup\confirmContent::widget([
     'id' => 'delete-hero',
     'url' => Url::to(['heroes/delete', 'id' => $model->id]),
-    'content' => 'Ви хочете видалити героя?',
+    'content' => Yii::t('backend','MSG_DELETE_STDHERO_CONFIRM'),
     'pjaxUpdate' => 'pjax-heroes'
 ]); ?>

@@ -74,6 +74,6 @@ class HeroesController extends Controller
         if (($model = StdHero::findOne(['id' => $id])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('Герой не знайдений');
+        throw new NotFoundHttpException(\Yii::t('common','MSG_STDHERO_NOTFOUND'));
     }
 }

@@ -18,7 +18,7 @@ class GridView extends \yii\grid\GridView {
     {
         parent::init();
 
-        $this->emptyText = 'Дані відсутні';
+        $this->emptyText = \Yii::t('backend','MSG_TABLE_EMPTY');
 
         if($this->dataController === null){
             $this->dataController = $this->view->context->id;

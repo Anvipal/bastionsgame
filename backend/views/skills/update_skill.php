@@ -10,11 +10,13 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\StdHero */
+/* @var $dropdownlists array */
 
-$this->title = 'Оновити';
+$this->title = \Yii::t('backend','TITLE_SKILL_UPDATE');
 ?>
 <div class="heroes-update">
     <?= $this->render('_form', [
         'model' => $model,
+        'dropdownlists' => $dropdownlists
     ]); ?>
 </div>

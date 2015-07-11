@@ -15,6 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class ObstaclesController extends Controller
 {
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -25,6 +28,11 @@ class ObstaclesController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return null|string
+     * @throws NotFoundHttpException
+     */
     public function actionView($id)
     {
         return $this->renderAuto('view', [
@@ -32,6 +40,9 @@ class ObstaclesController extends Controller
         ]);
     }
 
+    /**
+     * @return array|null|string|\yii\web\Response
+     */
     public function actionCreate()
     {
         $model = new StdObstacle();
@@ -44,6 +55,11 @@ class ObstaclesController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return array|null|string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -56,6 +72,12 @@ class ObstaclesController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return array|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -74,6 +96,6 @@ class ObstaclesController extends Controller
         if (($model = StdObstacle::findOne(['id' => $id])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('Герой не знайдений');
+        throw new NotFoundHttpException(\Yii::t('common','MSG_STDOBSTACLE_NOTFOUND'));
     }
 }

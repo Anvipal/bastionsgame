@@ -43,7 +43,7 @@ class StdObstacle extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Назва',
+            'title' => Yii::t('common','STDOBSTACLE_ATTR_TITLE'),//'Назва',
         ];
     }
 

@@ -16,13 +16,13 @@ use yii\helpers\Url;
 ?>
 
 <div class="header">
-    <div id="popup-title">Герой</div>
+    <div id="popup-title"><?= \Yii::t('backend','TITLE_STDHEROSKILL_POPUP'); ?></div>
     <div class="close">X</div>
 </div>
 
 <?= \backend\widgets\popup\Tabs::widget([
     'model' => $model,
-    'template' => ('{view}'),
+    'template' => '',
 ]); ?>
 
 <?= \backend\widgets\popup\mainContent::widget(['content' => $content]); ?>
