@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "heroes".
@@ -13,10 +14,12 @@ use Yii;
  * @property string $title
  * @property integer $hexp
  * @property integer $hlevel
+ * @property integer $skillCount
  *
  * @property User $idUser
  * @property StdHero $idStdhero
  * @property Quest $idQuest
+ * @property StdHeroSkill[] $idSkills
  */
 class Hero extends \yii\db\ActiveRecord
 {
@@ -63,6 +66,20 @@ class Hero extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if ($this->skillCount > 0)
+        {
+            $skills = StdHeroSkill::find()->andWhere(['id_stdhero' => $this->id_stdhero])->andWhere(['NOT IN','id_stdobstacle',ArrayHelper::map($this->idSkills,'id_obstacke','id_obstacke')])->asArray()->all();
+            if (count($skills) > 0)
+            {
+                $i = rand(0,count($skills)-1);
+
+            }
+        }
+        return parent::beforeSave($insert);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -90,8 +107,13 @@ class Hero extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSkills()
+    public function getIdSkills()
     {
         return $this->idStdhero->idStdSkills;
+    }
+
+    private function getSkillCount()
+    {
+        return ($this->hlevel / 10) + 1 - count($this->idSkills);
     }
 }
