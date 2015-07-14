@@ -44,7 +44,7 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_stdobstacle', 'id_stdhero', 'slevel'], 'required'],
+            [['id_stdobstacle', 'id_stdhero', 'slevel', 'title'], 'required'],
             [['id_stdobstacle', 'id_stdhero', 'slevel'], 'integer'],
             [['title'], 'string', 'max' => 150],
         ];

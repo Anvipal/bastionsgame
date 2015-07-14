@@ -28,7 +28,7 @@
 if ($model->isNewRecord)
     echo $form->field($model, 'id_stdobstacle')->dropDownList($dropdownlists['stdobstacles']);
 else
-    echo $form->field($model, 'id_stdobstacle')->hiddenInput();
+    echo $form->field($model, 'id_stdobstacle')->hiddenInput()->label(false);
 ?>
 <?= $form->field($model,'slevel')->dropDownList($model->idStdhero->skillLevelAvailable); ?>
 <?= $form->field($model, 'title')->textInput(); ?>
