@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "std_heroes".
@@ -13,15 +14,36 @@ use Yii;
  * @property Hero[] $heroes
  * @property StdObstacle[] $idStdobstacles
  * @property StdHeroSkill[] $idStdSkills
+ * @property array $heroSkillLevels
+ * @property array $skillLevelAvailable
  */
 class StdHero extends \yii\db\ActiveRecord
 {
+
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'std_heroes';
+    }
+
+
+
+    public function getHeroSkillLevels()
+    {
+        return ArrayHelper::map($this->getIdStdSkills()->select(['slevel'])->all(),'slevel','slevel');
+    }
+
+    public function getSkillLevelAvailable()
+    {
+        $arr = StdHeroSkill::skilllevel_list();
+        foreach ($this->getHeroSkillLevels() as $val)
+        {
+            unset($arr[$val]);
+        }
+        return $arr;
     }
 
     /**

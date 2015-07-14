@@ -23,6 +23,9 @@ use yii\helpers\ArrayHelper;
  */
 class Hero extends \yii\db\ActiveRecord
 {
+    const MAX_HERO_LEVEL = 20;
+    const BASE_EXP = 1000;
+
     /**
      * @inheritdoc
      */
@@ -58,28 +61,31 @@ class Hero extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_stdhero' => \Yii::t('common','STDHERO_ATTR_NAME'),
-            'title' => \Yii::t('common','HERO_ATTR_TITLE'),
-            'hexp' => \Yii::t('common','HERO_ATTR_EXP'),
-            'hlevel' => \Yii::t('common','HERO_LEVEL'),
+            'id_stdhero' => \Yii::t('common', 'STDHERO_ATTR_NAME'),
+            'title' => \Yii::t('common', 'HERO_ATTR_TITLE'),
+            'hexp' => \Yii::t('common', 'HERO_ATTR_EXP'),
+            'hlevel' => \Yii::t('common', 'HERO_LEVEL'),
         ];
     }
 
-    public function beforeSave($insert)
+    public function addExp($exp)
     {
-        if ($this->skillCount > 0)
-        {
-            $skills = StdHeroSkill::find()->andWhere(['id_stdhero' => $this->id_stdhero])->andWhere(['NOT IN','id_stdobstacle',ArrayHelper::map($this->idSkills,'id_obstacke','id_obstacke')])->asArray()->all();
-            if (count($skills) > 0)
-            {
-                $i = rand(0,count($skills)-1);
-
+        if (is_numeric($exp)) {
+            if ($this->hlevel < self::MAX_HERO_LEVEL) {
+                $this->hexp += $exp;
+                if ($this->hexp > self::BASE_EXP * $this->hlevel * $this->hlevel) {
+                    $this->levelUp();
+                }
             }
         }
-        return parent::beforeSave($insert);
     }
 
+    public function levelUp()
+    {
+        $this->hlevel += 1;
+        $this->hexp -= self::BASE_EXP * pow($this->hlevel - 1, 2);
+        $this->save(false);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -102,8 +108,9 @@ class Hero extends \yii\db\ActiveRecord
      */
     public function getIdQuest()
     {
-        return $this->hasOne(Quest::className(),['id' => 'id_quest'])->viaTable('questsheroes', ['id_hero' => 'id']);
+        return $this->hasOne(Quest::className(), ['id' => 'id_quest'])->viaTable('questsheroes', ['id_hero' => 'id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -112,8 +119,4 @@ class Hero extends \yii\db\ActiveRecord
         return $this->idStdhero->idStdSkills;
     }
 
-    private function getSkillCount()
-    {
-        return ($this->hlevel / 10) + 1 - count($this->idSkills);
-    }
 }

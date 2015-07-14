@@ -17,6 +17,19 @@ use Yii;
  */
 class StdHeroSkill extends \yii\db\ActiveRecord
 {
+    const SK_FIRST = 0;
+    const SK_SECOND = 1;
+    const SK_THIRD = 2;
+
+    public static function skilllevel_list()
+    {
+        return [
+            self::SK_FIRST => Yii::t('common','STDHEROSKILL_SK_FIRST'),
+            self::SK_SECOND => Yii::t('common','STDHEROSKILL_SK_SECOND'),
+            self::SK_THIRD => Yii::t('common','STDHEROSKILL_SK_THIRD'),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -31,7 +44,7 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_stdobstacle', 'id_stdhero'], 'required'],
+            [['id_stdobstacle', 'id_stdhero', 'slevel'], 'required'],
             [['id_stdobstacle', 'id_stdhero', 'slevel'], 'integer'],
             [['title'], 'string', 'max' => 150],
         ];
@@ -45,7 +58,7 @@ class StdHeroSkill extends \yii\db\ActiveRecord
         return [
             'id_stdhero' => Yii::t('common','STDHERO_ATTR_CLASSNAME'),
             'id_stdobstacle' => Yii::t('common','STDOBSTACLE_ATTR_CLASSNAME'),
-            'slevel' => 'Slevel',
+            'slevel' => Yii::t('common','STDHEROSKILL_ATTR_SLIVEL'),
             'title' => \Yii::t('common','STDHEROSKILL_ATTR_TITLE'),
         ];
     }

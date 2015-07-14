@@ -30,6 +30,7 @@ if ($model->isNewRecord)
 else
     echo $form->field($model, 'id_stdobstacle')->hiddenInput();
 ?>
+<?= $form->field($model,'slevel')->dropDownList($model->idStdhero->skillLevelAvailable); ?>
 <?= $form->field($model, 'title')->textInput(); ?>
     <div class="form-group confirm-btn-wrap">
         <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? \Yii::t('common','BUTTON_CREATE') : \Yii::t('common','BUTTON_SAVE'), [
