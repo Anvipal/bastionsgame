@@ -2,9 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: Alexan
- * Date: 10.07.2015
- * Time: 22:18
+ * Date: 14.07.2015
+ * Time: 22:32
  */
+
 /**
  * @var $this yii\web\View
  * @var $dataProvider yii\data\ActiveDataProvider
@@ -13,6 +14,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\StdHeroSkill;
 
 ?>
 <div class="skills-view popup-content new-view">
@@ -29,9 +31,10 @@ use yii\helpers\Url;
         'columns' => [
             'title',
             [
-                'label' => 'Перевага',
+                'label' => Yii::t('common','STDHEROSKILL_ATTR_CLASSNAME'),
                 'attribute' => 'idStdobstacle.title'
             ],
+            'slevelTitle',
             [
                 'class' => 'backend\components\grid\ButtonColumn',
                 'template' => '{update} {delete}',

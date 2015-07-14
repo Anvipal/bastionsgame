@@ -11,6 +11,7 @@ use Yii;
  * @property string $id_stdhero
  * @property integer $slevel
  * @property integer $title
+ * @property string $slevelTitle
  *
  * @property StdObstacle $idStdobstacle
  * @property StdHero $idStdhero
@@ -24,10 +25,15 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public static function skilllevel_list()
     {
         return [
-            self::SK_FIRST => Yii::t('common','STDHEROSKILL_SK_FIRST'),
-            self::SK_SECOND => Yii::t('common','STDHEROSKILL_SK_SECOND'),
-            self::SK_THIRD => Yii::t('common','STDHEROSKILL_SK_THIRD'),
+            self::SK_FIRST => Yii::t('common', 'STDHEROSKILL_SK_FIRST'),
+            self::SK_SECOND => Yii::t('common', 'STDHEROSKILL_SK_SECOND'),
+            self::SK_THIRD => Yii::t('common', 'STDHEROSKILL_SK_THIRD'),
         ];
+    }
+
+    public function getSlevelTitle()
+    {
+        return self::skilllevel_list()[$this->slevel];
     }
 
     /**
@@ -56,10 +62,11 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_stdhero' => Yii::t('common','STDHERO_ATTR_CLASSNAME'),
-            'id_stdobstacle' => Yii::t('common','STDOBSTACLE_ATTR_CLASSNAME'),
-            'slevel' => Yii::t('common','STDHEROSKILL_ATTR_SLIVEL'),
-            'title' => \Yii::t('common','STDHEROSKILL_ATTR_TITLE'),
+            'id_stdhero' => Yii::t('common', 'STDHERO_ATTR_CLASSNAME'),
+            'id_stdobstacle' => Yii::t('common', 'STDOBSTACLE_ATTR_CLASSNAME'),
+            'slevel' => Yii::t('common', 'STDHEROSKILL_ATTR_SLIVEL'),
+            'title' => \Yii::t('common', 'STDHEROSKILL_ATTR_TITLE'),
+            'slevelTitle' => Yii::t('common', 'STDHEROSKILL_ATTR_SLIVEL'),
         ];
     }
 

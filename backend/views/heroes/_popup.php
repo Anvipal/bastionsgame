@@ -22,8 +22,12 @@ use yii\helpers\Url;
 
 <?= \backend\widgets\popup\Tabs::widget([
     'model' => $model,
-    'template' => $model->isNewRecord ? '' : ('{view} {update} {delete}'),
+    'template' => $model->isNewRecord ? '' : ('{view} {update} {skills} {delete}'),
     'buttons' => [
+        'skills' => [
+            'url' => Url::to(['skills', 'id'=>$model->id]),
+            'title' => Yii::t('common', 'BUTTON_SKILLS')
+        ],
         'delete' => [
             'url' => '#delete-hero',
             'title' => \Yii::t('common','BUTTON_DELETE'),

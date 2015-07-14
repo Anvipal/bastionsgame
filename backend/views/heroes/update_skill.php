@@ -9,14 +9,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\StdHero */
+/* @var $skill common\models\StdHero */
 /* @var $dropdownlists array */
 
 $this->title = \Yii::t('backend','TITLE_SKILL_UPDATE');
 ?>
 <div class="skill-update">
-    <?= $this->render('_form', [
-        'model' => $model,
+    <?= $this->render('_skill_form', [
+        'skill' => $skill,
         'dropdownlists' => $dropdownlists
     ]); ?>
 </div>

@@ -15,7 +15,6 @@ use yii\helpers\ArrayHelper;
  * @property StdObstacle[] $idStdobstacles
  * @property StdHeroSkill[] $idStdSkills
  * @property array $heroSkillLevels
- * @property array $skillLevelAvailable
  */
 class StdHero extends \yii\db\ActiveRecord
 {
@@ -36,12 +35,12 @@ class StdHero extends \yii\db\ActiveRecord
         return ArrayHelper::map($this->getIdStdSkills()->select(['slevel'])->all(),'slevel','slevel');
     }
 
-    public function getSkillLevelAvailable()
+    public function getSkillLevelAvailable($slevel = null)
     {
         $arr = StdHeroSkill::skilllevel_list();
         foreach ($this->getHeroSkillLevels() as $val)
         {
-            unset($arr[$val]);
+            if (!(isset($slevel) && $val == $slevel))unset($arr[$val]);
         }
         return $arr;
     }
