@@ -18,8 +18,7 @@ return [
      'MSG_STDHEROSKILL_NOTFOUND'=>'Перевага не знайдена', 
      'TITLE_ACTIONS'=>'Дії', 
      'MSG_GRID_DELETE'=>'Видалити?', 
-     'STDHEROSKILL_ATTR_SLIVEL'=>'Порядок', 
-     'STDQUEST_ATTR_NAME'=>'Назва', 
+     'STDHEROSKILL_ATTR_SLIVEL'=>'Порядок',
      'STDQUEST_ATTR_DESCRIPTION'=>'Опис', 
      'STDQUEST_ATTR_MIDLEVEL'=>'Середній рівень', 
      'STDQUEST_ATTR_TIMETODO'=>'Час виконання', 
@@ -28,5 +27,6 @@ return [
      'STDHEROSKILL_SK_THIRD'=>'Третя перевага', 
      'BUTTON_SKILLS'=>'Переваги', 
      'STDHEROSKILL_ATTR_CLASSNAME'=>'Перевага', 
-     'MSG_STDHERO_NOTFOUND'=>'Стандартний герой не знайдений!',
+     'MSG_STDHERO_NOTFOUND'=>'Стандартний герой не знайдений!', 
+     'STDQUEST_ATTR_TITLE'=>'Назва',
 ];

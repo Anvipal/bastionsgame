@@ -11,7 +11,7 @@
  * @var $model common\models\StdQuest
  */
 
-$this->title = Yii::t('backend','TITLE_STDHERO_CREATE');
+$this->title = Yii::t('backend','TITLE_STDQUEST_CREATE');
 
 ?>
 <div class="quests-create">

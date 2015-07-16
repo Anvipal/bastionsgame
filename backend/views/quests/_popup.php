@@ -16,7 +16,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="header">
-    <div id="popup-title"><?= \Yii::t('backend','TITLE_STDHERO_POPUP') ?></div>
+    <div id="popup-title"><?= \Yii::t('backend','TITLE_STDQUESTS_POPUP') ?></div>
     <div class="close">X</div>
 </div>
 
@@ -36,6 +36,6 @@ use yii\helpers\Url;
 <?= \backend\widgets\popup\confirmContent::widget([
     'id' => 'delete-quest',
     'url' => Url::to(['quests/delete', 'id' => $model->id]),
-    'content' => Yii::t('backend','MSG_DELETE_STDHERO_CONFIRM'),
+    'content' => Yii::t('backend','MSG_DELETE_STDQUESTS_CONFIRM'),
     'pjaxUpdate' => 'pjax-quests'
 ]); ?>

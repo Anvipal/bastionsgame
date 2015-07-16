@@ -22,7 +22,18 @@
         'data-pjax-container' => '#pjax-quests',
     ]
 ]); ?>
-<?= $form->field($model, 'name')->textInput(); ?>
+<?= $form->field($model, 'title')->textInput(); ?>
+<?= $form->field($model,'obstacles')->widget(\kartik\select2\Select2::className(),[
+    'options' => [
+        'multiple' => true
+    ],
+    'pluginOptions' => [
+        'tags' => true,
+    ],
+    'data' => \yii\helpers\ArrayHelper::map(\common\models\StdObstacle::find()->select(['id','title'])->all(),'id','title'),
+]);
+?>
+
 <div class="form-group confirm-btn-wrap">
     <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? \Yii::t('common','BUTTON_CREATE') : \Yii::t('common','BUTTON_SAVE'), [
         'class' => 'btn-ok btn btn-ok-mini'

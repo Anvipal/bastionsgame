@@ -11,7 +11,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\StdQuest */
 
-$this->title = Yii::t('backend','TITLE_STDHERO_UPDATE');
+$this->title = Yii::t('backend','TITLE_STDQUEST_UPDATE');
 ?>
 <div class="quests-update">
     <?= $this->render('_form', [

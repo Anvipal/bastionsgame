@@ -19,6 +19,11 @@ return [
      'STDHEROSKILL_ADD_BUTTON'=>'Додати перевагу', 
      'TITLE_STDHEROSKILL_POPUP'=>'Перевага', 
      'STDHERO_SKILLS'=>'Переваги', 
-     'TITLE_STDOBSTACLE_VIEW'=>'Перегляд',
-     'TITLE_MAIN_PAGE'=>'Адмін-панель - Головна',
+     'TITLE_STDOBSTACLE_VIEW'=>'Перегляд', 
+     'TITLE_MAIN_PAGE'=>'Адмін-панель - Головна', 
+     'TITLE_STDQUEST_EDITOR'=>'Редактор завдань', 
+     'STDQUEST_ADD_BUTTON'=>'Додати завдання', 
+     'TITLE_STDQUESTS_POPUP'=>'Завдання', 
+     'MSG_DELETE_STDQUESTS_CONFIRM'=>'Ви точно бажаєте видалити завдання?', 
+     'TITLE_STDQUEST_VIEW'=>'Перегляд',
 ];

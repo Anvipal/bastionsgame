@@ -3,16 +3,19 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Exception;
+use yii\db\ActiveQuery;
+use yii\db\Query;
+use yii\db\QueryBuilder;
 
 /**
  * This is the model class for table "std_quests".
  *
  * @property string $id
- * @property string $name
+ * @property string $title
  * @property string $desc
  * @property string $midhlevel
  * @property string $hcnt
- * @property integer $obscales
  * @property integer $timetodo
  *
  * @property Quest[] $quests
@@ -20,6 +23,13 @@ use Yii;
  */
 class StdQuest extends \yii\db\ActiveRecord
 {
+    public $obstacles;
+
+    private function obstacle_line()
+    {
+        return '('.implode(',',$this->obstacles).')';
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,8 +45,11 @@ class StdQuest extends \yii\db\ActiveRecord
     {
         return [
             [['desc'], 'string'],
-            [['midhlevel', 'hcnt', 'obscales', 'timetodo'], 'integer'],
-            [['name'], 'string', 'max' => 255]
+            [['midhlevel', 'hcnt', 'timetodo'], 'integer'],
+            [['title'], 'string', 'max' => 255],
+            [['title'], 'unique'],
+            [['title'], 'required'],
+            [['obstacles'], 'safe'],
         ];
     }
 
@@ -46,8 +59,7 @@ class StdQuest extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => \Yii::t('common','STDQUEST_ATTR_NAME'),
+            'title' => \Yii::t('common','STDQUEST_ATTR_TITLE'),
             'desc' => \Yii::t('common','STDQUEST_ATTR_DESCRIPTION'),
             'midhlevel' => \Yii::t('common','STDQUEST_ATTR_MIDLEVEL'),
             'timetodo' => \Yii::t('common','STDQUEST_ATTR_TIMETODO'),
@@ -68,5 +80,31 @@ class StdQuest extends \yii\db\ActiveRecord
     public function getIdObstacles()
     {
         return $this->hasMany(StdObstacle::className(), ['id' => 'id_obstacle'])->viaTable('std_obstaclequest', ['id_quest' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    private function getQuestObstacleList()
+    {
+        $arr = [];
+        foreach ($this->_obstacles as $key)
+        {
+            $arr[] = [$this->id,$key];
+        }
+        return $arr;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        try {
+            Yii::$app->db->createCommand()->delete('std_obstaclequest', 'id_quest = :id AND id_obstacle NOT IN '.$this->obstacle_line(), [':id' => $this->id,])->execute();
+            Yii::$app->db->createCommand()->batchInsert('std_obstaclequest', ['id_quest', 'id_obstacle'], $this->getQuestObstacleList());
+        }
+        catch (Exception $e)
+        {
+            $this->delete();
+            throw $e;
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 }
