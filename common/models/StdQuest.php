@@ -58,6 +58,7 @@ class StdQuest extends \yii\db\ActiveRecord
             'desc' => \Yii::t('common', 'STDQUEST_ATTR_DESCRIPTION'),
             'midhlevel' => \Yii::t('common', 'STDQUEST_ATTR_MIDLEVEL'),
             'timetodo' => \Yii::t('common', 'STDQUEST_ATTR_TIMETODO'),
+            'hcnt' => Yii::t('common', 'STDQUEST_ATTR_HCNT'),
         ];
     }
 
