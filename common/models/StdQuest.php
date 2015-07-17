@@ -85,20 +85,20 @@ class StdQuest extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    private function getQuestObstacleList()
+    private function buildInsertFields()
     {
         $arr = [];
-        foreach ($this->_obstacles as $key)
+        foreach ($this->obstacles as $key)
         {
-            $arr[] = [$this->id,$key];
+            $arr[] = '((select count(t.id)+1 from `std_obstaclequest` t where t.id_quest='.$this->id.'),'.$this->id.','.$key.')';
         }
         return $arr;
     }
 
     public function afterSave($insert, $changedAttributes){
         try {
-            Yii::$app->db->createCommand()->delete('std_obstaclequest', 'id_quest = :id AND id_obstacle NOT IN '.$this->obstacle_line(), [':id' => $this->id,])->execute();
-            Yii::$app->db->createCommand()->batchInsert('std_obstaclequest', ['id_quest', 'id_obstacle'], $this->getQuestObstacleList());
+            Yii::$app->db->createCommand('DELETE FROM `std_obstaclequest` WHERE `id_quest` = :id', [':id' => $this->id,])->execute();
+            Yii::$app->db->createCommand('INSERT INTO `std_obstaclequest` (`id`,`id_quest`,`id_obstacle`) VALUES '.implode(',',$this->buildInsertFields()))->execute();
         }
         catch (Exception $e)
         {

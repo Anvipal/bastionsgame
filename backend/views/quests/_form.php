@@ -12,6 +12,8 @@
  * @var $form yii\bootstrap\ActiveForm
  */
 
+use yii\helpers\ArrayHelper;
+
 ?>
 <? $form = \yii\bootstrap\ActiveForm::begin([
     'id' => 'quests-form',
@@ -23,17 +25,21 @@
     ]
 ]); ?>
 <?= $form->field($model, 'title')->textInput(); ?>
-<?= $form->field($model,'obstacles')->widget(\kartik\select2\Select2::className(),[
-    'options' => [
-        'multiple' => true
-    ],
-    'pluginOptions' => [
-        'tags' => true,
-    ],
-    'data' => \yii\helpers\ArrayHelper::map(\common\models\StdObstacle::find()->select(['id','title'])->all(),'id','title'),
-]);
-?>
+<? $ddl = str_replace("\n",'',\yii\helpers\Html::dropDownList('StdQuest[obstacles][]',null,ArrayHelper::map(\common\models\StdObstacle::find()->select(['title', 'id'])->all(),'id','title'))); ?>
+<div id="obstacle-input-wrap">
+    <? if ($model->idObstacles): ?>
+    <? endif; ?>
+</div>
+<?= \yii\helpers\Html::a(Yii::t('backend','BUTTON_ADD'),'javascript:void(0);',['class' => 'btn btn-default', 'id'=>'add_obstacle', 'data-disable-ajax' => 0]); ?>
 
+<? $this->registerJs(
+    <<<JS
+    $('#add_obstacle').on('click',function(){
+        console.log('$ddl');
+        $('#obstacle-input-wrap').append('$ddl').join('<br/>');
+    });
+JS
+); ?>
 <div class="form-group confirm-btn-wrap">
     <?= \yii\bootstrap\Html::submitButton($model->isNewRecord ? \Yii::t('common','BUTTON_CREATE') : \Yii::t('common','BUTTON_SAVE'), [
         'class' => 'btn-ok btn btn-ok-mini'
