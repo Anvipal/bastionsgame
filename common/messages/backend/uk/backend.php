@@ -26,5 +26,6 @@ return [
      'TITLE_STDQUESTS_POPUP'=>'Завдання', 
      'MSG_DELETE_STDQUESTS_CONFIRM'=>'Ви точно бажаєте видалити завдання?', 
      'TITLE_STDQUEST_VIEW'=>'Перегляд', 
-     'BUTTON_ADD'=>'BUTTON_ADD', 
+     'BUTTON_ADD'=>'Додати',
+     'PLACEHOLDER_TIMEUNIT'=>'хв',
 ];

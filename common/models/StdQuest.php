@@ -19,16 +19,11 @@ use yii\db\QueryBuilder;
  * @property integer $timetodo
  *
  * @property Quest[] $quests
- * @property StdObstacle[] $idObstacles
+ * @property StdObstaclequest[] $idObstaclequest
  */
 class StdQuest extends \yii\db\ActiveRecord
 {
     public $obstacles;
-
-    private function obstacle_line()
-    {
-        return '('.implode(',',$this->obstacles).')';
-    }
 
     /**
      * @inheritdoc
@@ -59,10 +54,10 @@ class StdQuest extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'title' => \Yii::t('common','STDQUEST_ATTR_TITLE'),
-            'desc' => \Yii::t('common','STDQUEST_ATTR_DESCRIPTION'),
-            'midhlevel' => \Yii::t('common','STDQUEST_ATTR_MIDLEVEL'),
-            'timetodo' => \Yii::t('common','STDQUEST_ATTR_TIMETODO'),
+            'title' => \Yii::t('common', 'STDQUEST_ATTR_TITLE'),
+            'desc' => \Yii::t('common', 'STDQUEST_ATTR_DESCRIPTION'),
+            'midhlevel' => \Yii::t('common', 'STDQUEST_ATTR_MIDLEVEL'),
+            'timetodo' => \Yii::t('common', 'STDQUEST_ATTR_TIMETODO'),
         ];
     }
 
@@ -74,36 +69,24 @@ class StdQuest extends \yii\db\ActiveRecord
         return $this->hasMany(Quest::className(), ['stdquests_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdObstacles()
+    public function getIdObstaclequest()
     {
-        return $this->hasMany(StdObstacle::className(), ['id' => 'id_obstacle'])->viaTable('std_obstaclequest', ['id_quest' => 'id']);
+        return $this->hasMany(StdObstaclequest::className(), ['id_quest' => 'id']);
     }
 
-    /**
-     * @return array
-     */
-    private function buildInsertFields()
+    public function afterSave($insert, $changedAttributes)
     {
-        $arr = [];
-        foreach ($this->obstacles as $key)
-        {
-            $arr[] = '((select count(t.id)+1 from `std_obstaclequest` t where t.id_quest='.$this->id.'),'.$this->id.','.$key.')';
-        }
-        return $arr;
-    }
-
-    public function afterSave($insert, $changedAttributes){
-        try {
-            Yii::$app->db->createCommand('DELETE FROM `std_obstaclequest` WHERE `id_quest` = :id', [':id' => $this->id,])->execute();
-            Yii::$app->db->createCommand('INSERT INTO `std_obstaclequest` (`id`,`id_quest`,`id_obstacle`) VALUES '.implode(',',$this->buildInsertFields()))->execute();
-        }
-        catch (Exception $e)
-        {
-            $this->delete();
-            throw $e;
+        StdObstaclequest::deleteAll(['id_quest' => $this->id]);
+        foreach ($this->obstacles as $obstacle) {
+            $obs = null;
+            if (!$obs = StdObstaclequest::findOne(['id_quest' => $this->id, 'id_obstacle' => $obstacle])) {
+                $obs = new StdObstaclequest();
+                $obs->id_obstacle = $obstacle;
+                $obs->id_quest = $this->id;
+                $obs->cnt = 0;
+            }
+            $obs->cnt += 1;
+            $obs->save();
         }
         parent::afterSave($insert, $changedAttributes);
     }

@@ -18,14 +18,15 @@ $this->title = Yii::t('backend', 'TITLE_STDQUEST_VIEW')
         <span><?= $model->getAttributeLabel('title'); ?></span>
         <span><?= $model->title; ?></span>
     </div>
-    <? if ($model->idObstacles): ?>
+    <? if ($model->idObstaclequest): ?>
         <div class="obstacles-wrap">
-            <? foreach ($model->idObstacles as $obstacle): ?>
-                <span><?= $obstacle->getAttributeLabel('title'); ?></span>
-                <span><?= $obstacle->title; ?></span>
-                <hr/>
-            <? endforeach; ?>
+            <? foreach ($model->idObstaclequest as $obstaclequest):
+                for ($i = 0; $i < $obstaclequest->cnt; $i++): ?>
+                    <span><?= $obstaclequest->idObstacle->getAttributeLabel('title'); ?></span>
+                    <span><?= $obstaclequest->idObstacle->title; ?></span>
+                    <br/>
+                <? endfor;
+            endforeach; ?>
         </div>
     <? endif; ?>
-
 </div>
