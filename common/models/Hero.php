@@ -65,6 +65,7 @@ class Hero extends \yii\db\ActiveRecord
             'title' => \Yii::t('common', 'HERO_ATTR_TITLE'),
             'hexp' => \Yii::t('common', 'HERO_ATTR_EXP'),
             'hlevel' => \Yii::t('common', 'HERO_LEVEL'),
+            'idSkills' => Yii::t('common', 'STDHEROSKILL_ATTR_CLASSNAME')
         ];
     }
 
@@ -116,7 +117,7 @@ class Hero extends \yii\db\ActiveRecord
      */
     public function getIdSkills()
     {
-        return $this->idStdhero->idStdSkills;
+        return StdHeroSkill::find()->joinWith('idHero')->andWhere('(`std_obstaclehero`.`slevel` < (`heroes`.`hlevel` DIV 10)+1)')->orderBy(['slevel' => SORT_ASC])->all();
     }
 
 }

@@ -113,8 +113,8 @@ class Quest extends \yii\db\ActiveRecord
         $users = User::find()->select(['id'])->all();
         foreach ($users as $user) {
             /* @var $user User */
-            $existing = Quest::find()->select(['id', 'id_stdquests'])->andWhere(['id_user' => $user->id])->asArray()->all();
-            if (count($existing) < self::MAX_QUESTS) {
+            $existing = Quest::find()->select(['id', 'id_stdquests'])->andWhere(['id_user' => $user->id])->count();
+            if ($existing < self::MAX_QUESTS) {
                 $newquests = StdQuest::find()->select(['id'])->andOnCondition(['NOT IN', 'id', array_values(ArrayHelper::map($existing, 'id', 'is_stdquests'))])->all();
                 $newquests = array_rand($newquests, self::MAX_QUESTS - count($existing));
                 foreach ($newquests as $newquest) {

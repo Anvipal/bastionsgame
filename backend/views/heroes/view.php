@@ -25,7 +25,7 @@ $this->title = Yii::t('backend', 'TITLE_STDHERO_VIEW')
             <span><?= $skill->getAttributeLabel('title'); ?></span>
             <span><?= $skill->title; ?></span>
             <div class="heroes-skills-obscales-wrap">
-                <span><?= $skill->idStdobstacle->getAttributeLabel('title') ?></span>
+                <span><?= $skill->getAttributeLabel('id_stdobstacle') ?></span>
                 <span><?= $skill->idStdobstacle->title; ?></span>
             </div>
         <? endforeach; ?>

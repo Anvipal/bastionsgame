@@ -35,7 +35,8 @@ class User extends \yii\db\ActiveRecord
         return [
             [['goldcnt'], 'integer'],
             [['email', 'name'], 'string', 'max' => 255],
-            [['pwdhash', 'salt'], 'string', 'max' => 32]
+            [['pwdhash', 'salt'], 'string', 'max' => 32],
+            [['email', 'name'], 'unique'],
         ];
     }
 

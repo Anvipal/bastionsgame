@@ -75,6 +75,16 @@ class StdQuest extends \yii\db\ActiveRecord
         return $this->hasMany(StdObstaclequest::className(), ['id_quest' => 'id']);
     }
 
+    public function getRewards()
+    {
+        return $this->hasMany(StdReward::className(),['id' => 'id_stdreward'])->viaTable('std_questreward', ['id_quest' => 'id']);
+    }
+
+    public function getBounties()
+    {
+        return $this->hasMany(StdBounty::className(),['id_stdquest' => 'id']);
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         StdObstaclequest::deleteAll(['id_quest' => $this->id]);

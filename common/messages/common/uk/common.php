@@ -29,5 +29,8 @@ return [
      'STDHEROSKILL_ATTR_CLASSNAME'=>'Перевага', 
      'MSG_STDHERO_NOTFOUND'=>'Стандартний герой не знайдений!', 
      'STDQUEST_ATTR_TITLE'=>'Назва', 
-     'STDQUEST_ATTR_HCNT'=>'К-сть необхідних героїв',
+     'STDQUEST_ATTR_HCNT'=>'К-сть необхідних героїв', 
+     'HERO_ATTR_TITLE'=>'Ім`я',
+     'HERO_ATTR_EXP'=>'Досвід',
+     'HERO_LEVEL'=>'Рівень',
 ];

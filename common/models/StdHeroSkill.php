@@ -53,6 +53,7 @@ class StdHeroSkill extends \yii\db\ActiveRecord
             [['id_stdobstacle', 'id_stdhero', 'slevel', 'title'], 'required'],
             [['id_stdobstacle', 'id_stdhero', 'slevel'], 'integer'],
             [['title'], 'string', 'max' => 150],
+            [['title'], 'unique'],
         ];
     }
 
@@ -84,5 +85,10 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     public function getIdStdhero()
     {
         return $this->hasOne(StdHero::className(), ['id' => 'id_stdhero']);
+    }
+
+    public function getIdHero()
+    {
+        return $this->hasOne(Hero::className(), ['id_stdhero' => 'id_stdhero']);
     }
 }
