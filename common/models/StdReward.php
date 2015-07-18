@@ -15,6 +15,9 @@ use Yii;
  */
 class StdReward extends \yii\db\ActiveRecord
 {
+
+    const R_T_GOLD = 1;
+    const R_T_EXP = 2;
     /**
      * @inheritdoc
      */
@@ -55,5 +58,10 @@ class StdReward extends \yii\db\ActiveRecord
     public function getIdStdquests()
     {
         return $this->hasMany(StdQuest::className(), ['id' => 'id_stdquest'])->viaTable('std_questreward', ['id_stdreward' => 'id']);
+    }
+
+    public function useReward()
+    {
+
     }
 }

@@ -16,6 +16,9 @@ use Yii;
  */
 class StdBounty extends \yii\db\ActiveRecord
 {
+    const B_T_MAIN = 1;
+    const B_T_BONUS = 2;
+
     /**
      * @inheritdoc
      */
@@ -30,8 +33,8 @@ class StdBounty extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_stdquest', 'id_stdreward'], 'required'],
-            [['id_stdquest', 'id_stdreward', 'cnt'], 'integer'],
+            [['id_stdquest', 'id_stdreward', 'cnt', 'type'], 'required'],
+            [['id_stdquest', 'id_stdreward', 'cnt', 'type'], 'integer'],
         ];
     }
 
@@ -44,6 +47,7 @@ class StdBounty extends \yii\db\ActiveRecord
             'id_stdquest' => 'Id Stdquest',
             'id_stdreward' => 'Id Stdreward',
             'cnt' => 'Cnt',
+            'type' => 'Type',
         ];
     }
 
