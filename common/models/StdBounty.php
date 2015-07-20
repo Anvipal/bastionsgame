@@ -19,6 +19,14 @@ class StdBounty extends \yii\db\ActiveRecord
     const B_T_MAIN = 1;
     const B_T_BONUS = 2;
 
+    public static function type_list($type = null){
+        $arr = [
+            self::B_T_MAIN => Yii::t('common', 'STDBOUNTY_BT_MAIN'),
+            self::B_T_BONUS => Yii::t('common', 'STDBOUNTY_BT_BONUS'),
+        ];
+        return isset($type) ? $arr[$type] : $arr;
+    }
+
     /**
      * @inheritdoc
      */

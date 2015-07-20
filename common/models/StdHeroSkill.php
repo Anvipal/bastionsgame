@@ -22,18 +22,19 @@ class StdHeroSkill extends \yii\db\ActiveRecord
     const SK_SECOND = 1;
     const SK_THIRD = 2;
 
-    public static function skilllevel_list()
+    public static function skilllevel_list($slevel = null)
     {
-        return [
+        $arr =  [
             self::SK_FIRST => Yii::t('common', 'STDHEROSKILL_SK_FIRST'),
             self::SK_SECOND => Yii::t('common', 'STDHEROSKILL_SK_SECOND'),
             self::SK_THIRD => Yii::t('common', 'STDHEROSKILL_SK_THIRD'),
         ];
+        return isset($slevel) ? $arr[$slevel] : $arr;
     }
 
     public function getSlevelTitle()
     {
-        return self::skilllevel_list()[$this->slevel];
+        return self::skilllevel_list($this->slevel);
     }
 
     /**
