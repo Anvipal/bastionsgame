@@ -20,8 +20,8 @@ use yii\db\QueryBuilder;
  *
  * @property Quest[] $quests
  * @property StdObstaclequest[] $idObstaclequest
- * @property StdBounty $mainBounty
- * $property StdBounty $bonusBounty
+ * @property StdBounty[] $mainBounty
+ * $property StdBounty[] $bonusBounty
  */
 class StdQuest extends \yii\db\ActiveRecord
 {
@@ -84,12 +84,12 @@ class StdQuest extends \yii\db\ActiveRecord
 
     public function getMainBounty()
     {
-        return $this->hasOne(StdBounty::className(),['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_MAIN]);
+        return $this->hasMany(StdBounty::className(),['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_MAIN]);
     }
 
     public function getBonusBounty()
     {
-        return $this->hasOne(StdBounty::className(), ['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_BONUS]);
+        return $this->hasMany(StdBounty::className(), ['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_BONUS]);
     }
 
     public function afterSave($insert, $changedAttributes)
