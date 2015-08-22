@@ -32,6 +32,7 @@ class StdObstaclequest extends \yii\db\ActiveRecord
         return [
             [['id_obstacle', 'id_quest'], 'required'],
             [['id_obstacle', 'id_quest', 'cnt'], 'integer'],
+            [['cnt'], 'default', 'value' => 0]
         ];
     }
 
@@ -61,5 +62,17 @@ class StdObstaclequest extends \yii\db\ActiveRecord
     public function getIdQuest()
     {
         return $this->hasOne(StdQuest::className(), ['id' => 'id_quest']);
+    }
+
+    /**
+     * @param $id_o integer
+     * @param $id_q integer
+     * @return bool
+     */
+    public static function rel($id_o, $id_q){
+        $model = self::findOne(['id_quest' => $id_q, 'id_obstacle' => $id_o]);
+        $model = $model ?: new self;
+        $model->cnt += 1;
+        return $model->save();
     }
 }

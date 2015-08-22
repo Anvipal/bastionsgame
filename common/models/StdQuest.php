@@ -32,7 +32,7 @@ class StdQuest extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'std_quests';
+        return 'std_quest';
     }
 
     /**
@@ -79,12 +79,12 @@ class StdQuest extends \yii\db\ActiveRecord
 
     public function getRewards()
     {
-        return $this->hasMany(StdReward::className(),['id' => 'id_stdreward'])->viaTable('std_questreward', ['id_quest' => 'id']);
+        return $this->hasMany(StdReward::className(), ['id' => 'id_stdreward'])->viaTable('std_questreward', ['id_quest' => 'id']);
     }
 
     public function getMainBounty()
     {
-        return $this->hasMany(StdBounty::className(),['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_MAIN]);
+        return $this->hasMany(StdBounty::className(), ['id_stdquest' => 'id'])->andWhere(['type' => StdBounty::B_T_MAIN]);
     }
 
     public function getBonusBounty()
@@ -96,16 +96,9 @@ class StdQuest extends \yii\db\ActiveRecord
     {
         StdObstaclequest::deleteAll(['id_quest' => $this->id]);
         foreach ($this->obstacles as $obstacle) {
-            $obs = null;
-            if (!$obs = StdObstaclequest::findOne(['id_quest' => $this->id, 'id_obstacle' => $obstacle])) {
-                $obs = new StdObstaclequest();
-                $obs->id_obstacle = $obstacle;
-                $obs->id_quest = $this->id;
-                $obs->cnt = 0;
-            }
-            $obs->cnt += 1;
-            $obs->save();
+            StdObstaclequest::rel($obstacle, $this->id);
         }
-        parent::afterSave($insert, $changedAttributes);
+        return parent::afterSave($insert, $changedAttributes);
     }
+
 }

@@ -23,7 +23,7 @@ $this->title = \Yii::t('backend','TITLE_STDOBSTACLES_EDITOR');
             [
                 'title' => \Yii::t('backend','STDOBSTACLE_ADD_BUTTON'),
                 'url' => ['create'],
-                'class' => 'new-add grey-btn btn'
+                'class' => 'grey-btn btn'
             ]
         ],
         'columns' => [

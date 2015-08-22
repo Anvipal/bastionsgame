@@ -45,7 +45,7 @@ class Quest extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'quests';
+        return 'quest';
     }
 
     /**

@@ -25,7 +25,7 @@ class StdHero extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'std_heroes';
+        return 'std_hero';
     }
 
 

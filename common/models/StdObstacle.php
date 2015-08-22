@@ -21,7 +21,7 @@ class StdObstacle extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'std_obstacles';
+        return 'std_obstacle';
     }
 
     /**

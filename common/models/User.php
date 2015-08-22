@@ -24,7 +24,7 @@ class User extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'users';
+        return 'user';
     }
 
     /**
@@ -51,7 +51,7 @@ class User extends \yii\db\ActiveRecord
             'name' => 'Name',
             'pwdhash' => 'Pwdhash',
             'salt' => 'Salt',
-            'goldcnt' => 'Goldcnt',
+            'goldcnt' => Yii::t('frontend','USER_ATTR_GOLDCNT'),
         ];
     }
 

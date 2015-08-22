@@ -23,7 +23,7 @@ $this->title = Yii::t('backend','TITLE_STDQUEST_EDITOR');
             [
                 'title' => Yii::t('backend','STDQUEST_ADD_BUTTON'), //'Додати героя',
                 'url' => ['create'],
-                'class' => 'new-add grey-btn btn'
+                'class' => 'grey-btn btn'
             ]
         ],
         'columns' => [

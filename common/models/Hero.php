@@ -31,7 +31,7 @@ class Hero extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'heroes';
+        return 'hero';
     }
 
     /**
